@@ -15,7 +15,7 @@
         </div>
         <div class="info">
         @guest
-        <a href="#" class="d-block"> </a>
+        <a href="\" class="d-block"> </a>
 
         @else
         <a href="#" class="d-block"> {{ Auth::user()->name }}</a>
