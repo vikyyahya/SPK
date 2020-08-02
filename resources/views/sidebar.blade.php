@@ -30,7 +30,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
+               <li class="nav-item has-treeview menu-open">
             <a href="/users" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -51,7 +51,7 @@
 
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-user-circle"></i>
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 KELOLA BOBOT
               </p>
@@ -61,7 +61,7 @@
 
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-user-circle"></i>
+              <i class="nav-icon fas fa-cart-arrow-down"></i>
               <p>
                 MASTER SUPPLIER
               </p>
@@ -71,9 +71,9 @@
 
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-user-circle"></i>
+              <i class="nav-icon fas fa-poll-h"></i>
               <p>
-                QUOTATION
+                PENAWARAN HARGA
               </p>
             </a>
           </li>
@@ -81,7 +81,7 @@
 
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-user-circle"></i>
+              <i class="nav-icon fas fa-chart-line"></i>
               <p>
                 PERANGKINGAN
               </p>
@@ -96,3 +96,6 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+
+
+  
