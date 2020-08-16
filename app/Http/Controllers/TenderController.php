@@ -14,4 +14,9 @@ class TenderController extends Controller
         $tender = Tender::all();
         return view('tender.tender', ['tender' => $tender]);
     }
+
+    public function addTender(){
+        return view('tender.add_tender');
+
+    }
 }

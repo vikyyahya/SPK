@@ -22,10 +22,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users', 'UserController@user');
 Route::get('/adduser', 'UserController@add_user');
+Route::get('/edituser/{id}', 'UserController@editUser');
 Route::post('/createuser', 'UserController@create');
 Route::get('/user/{id}/delete', 'UserController@delete');
 // Tender
 Route::get('/tender', 'TenderController@tender');
+Route::get('/addtender', 'TenderController@addTender');
 
 
 

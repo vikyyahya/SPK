@@ -49,6 +49,15 @@ class UserController extends Controller
         return redirect('/users')->with('sukses', 'Data Berhasil Di Input!');
     }
 
+    public function editUser($id){
+        $level = Level::pluck('nama_level', 'id');
+
+        $user = User::find($id);
+
+        return view('user.editUser',['user' => $user,'level' => $level]);
+
+    }
+
     public function delete($id)
     {
         $user = User::find($id);

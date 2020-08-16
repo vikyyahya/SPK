@@ -73,7 +73,7 @@
                             <!-- URL::to('/admin/category/detail.id='.$cate-id -->
                            
 
-                            <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip"
+                            <a href="/edituser/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip"
                                 data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>

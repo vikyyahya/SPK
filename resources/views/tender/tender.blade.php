@@ -28,7 +28,7 @@
     <i class="fas fa-print"></i>
 </a>
 
-<a href="/adduser" class="btn btn-primary">
+<a href="/addtender" class="btn btn-primary">
     <i class="fa fa-plus nav-icon"></i>
 </a>
 
