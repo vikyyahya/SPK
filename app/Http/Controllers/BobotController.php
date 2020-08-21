@@ -28,8 +28,14 @@ class BobotController extends Controller
             ['id' => '2', 'name' => 'Kualitas'],
             ['id' => '2', 'name' => 'Status Stok Barang'],
         ]);
+        $nilais = collect([
+            ['id' => '1', 'name' => '1'],
+            ['id' => '2', 'name' => '2'],
+            ['id' => '3', 'name' => '3'],
+            ['id' => '4', 'name' => '4'],
+        ]);
         $kategori = $kategories->pluck('name','name');
-        $nilai = ["1","2","3","4","5"];
+        $nilai = $nilais->pluck('name','name');
         $deskripsi = $deskripsies->pluck('name','name');
 
         return view('bobot.editBobot',['bobot' => $bobot, 'kategori'=>$kategori,'deskripsi'=>$deskripsi, 'tender'=> $tender, 'nilai'=>$nilai]);
@@ -49,15 +55,40 @@ class BobotController extends Controller
             ['id' => '2', 'name' => 'Kualitas'],
             ['id' => '2', 'name' => 'Status Stok Barang'],
         ]);
+        $nilais = collect([
+            ['id' => '1', 'name' => '1'],
+            ['id' => '2', 'name' => '2'],
+            ['id' => '3', 'name' => '3'],
+            ['id' => '4', 'name' => '4'],
+        ]);
+
         $kategori = $kategories->pluck('name','name');
-        $nilai = ["1","2","3","4","5"];
+        $nilai = $nilais->pluck('name','name');
         $deskripsi = $deskripsies->pluck('name','name');
         return view('bobot.addBobot',['kategori'=>$kategori,'deskripsi'=>$deskripsi, 'tender'=> $tender],['nilai'=>$nilai]);
 
     }
 
+     
+    public function update(Request $request,$id)
+    {
+        $bobot = Bobot::find($id);
+        $tender = Tender::pluck('nama_proyek', 'id');
+
+        $bobot->update($request->all());
+       
+        return redirect('/bobot')->with('sukses', 'Data berhasil diupdate!');
+    }
+
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'tender' => 'nullable',
+            'deskripsi' => 'nullable',
+            'nilai' => 'nullable',
+            'kategori' => 'nullable',
+        ]);
+
         $data = $request->all();
 
         Bobot::create([
@@ -68,6 +99,7 @@ class BobotController extends Controller
         ]);
         return redirect('/bobot')->with('sukses', 'Data berhasil simpan!');
     }
+    
 
     public function delete($id)
     {

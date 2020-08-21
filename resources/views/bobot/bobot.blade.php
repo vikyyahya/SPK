@@ -60,7 +60,7 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$s->deskripsi}}</td>
                     <td>{{$s->nilai}}</td>    
-                    <td>{{$s->ketegori}}</td>                 
+                    <td>{{$s->kategori}}</td>                 
                     <td>{{$s->tender->nama_proyek}}</td>                 
 
                     <td>

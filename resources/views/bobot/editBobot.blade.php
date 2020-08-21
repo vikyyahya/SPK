@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form action="/createbobot" method="POST">
+		<form action="/updatebobot/{{ $bobot->id}}" method="POST">
 
 			@csrf
 
@@ -23,22 +23,22 @@
 
 					<div class="form-group">
 						<label>Nama Tender</label>
-						{{ Form::select('tender', $tender, null, ['placeholder' => 'Pilih tender...', 'required', 'class' => 'form-control']) }}
+						{{ Form::select('tender', $tender, $bobot->id_tender, ['placeholder' => 'Pilih tender...', 'required', 'class' => 'form-control']) }}
 					</div>
 
 					<div class="form-group">
-						<label>Deskripsi</label>{{$bobot->deskripsi}}
+						<label>Deskripsi</label>
 						{{ Form::select('deskripsi', $deskripsi, $bobot->deskripsi, ['placeholder' => 'Pilih deskripsi...', 'required', 'class' => 'form-control']) }}
 					</div>
 
 					<div class="form-group">
 						<label>Nilai Bobot</label>
-						{{ Form::select('nilai', $nilai, null, ['placeholder' => 'Pilih Nilai...', 'required', 'class' => 'form-control']) }}
+						{{ Form::select('nilai', $nilai, $bobot->nilai, ['placeholder' => 'Pilih Nilai...', 'required', 'class' => 'form-control']) }}
                     </div>
 
 					<div class="form-group">
 						<label>Kategori</label>
-						{{ Form::select('kategori', $kategori, null, ['placeholder' => 'Pilih Kategori...', 'required', 'class' => 'form-control']) }}
+						{{ Form::select('kategori', $kategori, $bobot->kategori, ['placeholder' => 'Pilih Kategori...', 'required', 'class' => 'form-control']) }}
 					</div>
                     
 

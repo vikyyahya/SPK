@@ -42,4 +42,6 @@ Route::get('/addbobot', 'BobotController@addBobot');
 Route::post('/createbobot', 'BobotController@create');
 Route::get('/bobot/{id}/delete', 'BobotController@delete');
 Route::get('/editbobot/{id}', 'BobotController@edit');
+Route::post('/updatebobot/{id}', 'BobotController@update');
+
 
