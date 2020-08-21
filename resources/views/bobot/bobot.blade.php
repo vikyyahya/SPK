@@ -28,7 +28,7 @@
     <i class="fas fa-print"></i>
 </a>
 
-<a href="/adduser" class="btn btn-primary">
+<a href="/addbobot" class="btn btn-primary">
     <i class="fa fa-plus nav-icon"></i>
 </a>
 
@@ -46,39 +46,35 @@
             <thead >
                 <tr>
                     <th class="text-center">No</th>
-                    <th class="text-center">Nama</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Level</th>
-                    <th class="text-center">Nama Perusahaan</th>
-                    <th class="text-center">Produk</th>
-                    <th class="text-center">Alamat Perusahaan</th>
-                    <th class="text-center">No Telepon</th>
+                    <th class="text-center">Deskripsi</th>
+                    <th class="text-center">Nilai Bobot</th>
+                    <th class="text-center">Kategori</th>
+                    <th class="text-center">Nama Tender</th>
+                 
                     <th class="text-center" width="8%">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users ?? '' as $s)
+                @foreach($bobot ?? '' as $s)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$s->name}}</td>
-                    <td>{{$s->email}}</td>                 
-                    <td>{{$s->levels->nama_level}}</td>                 
-                    <td>{{$s->nama_perusahaan}}</td>                 
-                    <td>{{$s->produk}}</td> 
-                    <td>{{$s->alamat_perusahaan}}</td>                 
-                    <td>{{$s->no_telp}}</td>                 
+                    <td>{{$s->deskripsi}}</td>
+                    <td>{{$s->nilai}}</td>    
+                    <td>{{$s->ketegori}}</td>                 
+                    <td>{{$s->tender->nama_proyek}}</td>                 
+
                     <td>
                         <div class="btn-group">
 
                             <!-- URL::to('/admin/category/detail.id='.$cate-id -->
                            
 
-                            <a href="/edituser/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip"
+                            <a href="/editbobot/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip"
                                 data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/user/{{$s->id}}/delete"
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/bobot/{{$s->id}}/delete"
                                 class="btn btn btn-danger btn-sm">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>

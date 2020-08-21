@@ -64,5 +64,20 @@ class UserController extends Controller
         $user->delete($user);
         return redirect('/users')->with('sukses', 'Data berhasil dihapus!');
     }
+    
+    public function update(Request $request,$id)
+    {
+        $user = User::find($id);
+        $level = Level::pluck('nama_level', 'id');
+        if ($request->password != $request->syncpassword){
+            return view('user.editUser',['user' => $user,'level' => $level])->with('error', 'Password tidak sama');
+        }
+        else if ($request->password == '') {
+            $user->update($request->except('password'));
+        } else {
+            $user->update($request->all());
+        }
+        return redirect('/users')->with('sukses', 'Data Berhasil Di Update!');
+    }
 
 }
