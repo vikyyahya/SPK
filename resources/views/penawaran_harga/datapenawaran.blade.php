@@ -62,7 +62,7 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$s->name}}</td>
                     <td>{{$s->email}}</td>                 
-                    <td>{{$s->levels->nama_level ?? '' }}</td>                 
+                    <td>{{$s->levels->nama_level}}</td>                 
                     <td>{{$s->nama_perusahaan}}</td>                 
                     <td>{{$s->produk}}</td> 
                     <td>{{$s->alamat_perusahaan}}</td>                 

@@ -56,4 +56,12 @@ class PenawaranHargaController extends Controller
 
     }
 
+    public function datapenawaran()
+    {
+        $penawaran = Penawaran::all();
+        return view('user.user', ['penawaran' => $penawaran]);
+    }
+
+
+
 }
