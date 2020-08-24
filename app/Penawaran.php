@@ -12,4 +12,14 @@ class Penawaran extends Model
     protected $fillable = [
         'id_user', 'id_tender', 'nama_barang','harga','stock','pembayaran',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'id_user', 'id');
+    }
+
+    public function tender()
+    {
+        return $this->belongsTo('App\Tender', 'id_tender', 'id');
+    }
 }

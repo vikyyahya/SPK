@@ -15,6 +15,12 @@ class PenawaranHargaController extends Controller
         $this->middleware('auth');
     }
 
+
+    public function index(){
+        $p = Penawaran::all();
+        return view('penawaran_harga.penawaran', ['p' => $p]);
+    }
+
     public function penawaranharga()
     {
         if (Auth::check()){

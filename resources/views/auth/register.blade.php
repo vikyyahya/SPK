@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>PT Powertek Indonesia| Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -21,21 +21,22 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition login-page">
-<div class="login-box">
+<body >
+<div>
   <div class="login-logo">
-    <a href="#"><b>Admin</b>LTE</a>
+    <a href="#"><b>PT Powertek Indonesia</b></a>
   </div>
   <!-- /.login-logo -->
 
-  <div class="card">
-    <div class="card-body register-card-body">
+  <div class="card ">
+    <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
 
       <form  method="POST" action="{{ route('register') }}">
       @csrf
+
       <label for="name" class=" text-md-right">{{ __('Name') }}</label>
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
@@ -72,7 +73,46 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-        </div>
+        </div> -->
+
+        <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Horizontal Form</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                        <label class="form-check-label" for="exampleCheck2">Remember me</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-info">Sign in</button>
+                  <button type="submit" class="btn btn-default float-right">Cancel</button>
+                </div>
+                <!-- /.card-footer -->
+              </form>
+            </div>
+            
         <div class="row">
           <div class="col-8">
                       </div>
@@ -82,6 +122,9 @@
           </div>
           <!-- /.col -->
         </div>
+     
+     
+     
       </form>
 
       <a href="/login" class="text-center">I already have a membership</a>

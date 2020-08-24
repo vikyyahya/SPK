@@ -46,6 +46,7 @@ Route::post('/updatebobot/{id}', 'BobotController@update');
 
 //penawaran
 Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
+Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
 Route::post('/creatpenawaran', 'PenawaranHargaController@create');
 
 

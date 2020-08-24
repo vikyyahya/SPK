@@ -16,26 +16,17 @@
     <i class="icon fas fa-check"></i> {{ $sukses }}
 </div>
 @endif
-
-{{-- <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#importExcel">
-    <i class="fas fa-file-excel"></i> Import Excel
-</button> --}}
-
 <br/>
 
-<a href="#" class="btn btn-success" data-toggle="tooltip" title="Print"
-    onclick="">
-    <i class="fas fa-print"></i>
-</a>
 
-<a href="/adduser" class="btn btn-primary">
-    <i class="fa fa-plus nav-icon"></i>
+<a href="/adduser" class="btn btn-primary ml-3">
+    <i class="fa fa-plus nav-icon">Tambah User</i>
 </a>
 
 <br/>
 <br/>
 
-<div class="card .mt-3" style="border-top: 2px solid">
+<div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
         <h4>User</h4>

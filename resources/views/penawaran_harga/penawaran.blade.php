@@ -23,16 +23,17 @@
 
 <br/>
 
-<a href="/addtender" class="btn btn-primary ml-3">
-    <i class="fa fa-plus nav-icon">
-    Tambah Tender
-    </i>
+<a href="/penawaranharga" class="btn btn-primary ml-3">
+    <i class="fa fa-plus nav-icon">Buat Penawaran</i>
 </a>
+
+<br/>
+<br/>
 
 <div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
-        <h4>Tender</h4>
+        <h4>User</h4>
     </div>
 
     <div class="card-body">
@@ -40,39 +41,33 @@
             <thead >
                 <tr>
                     <th class="text-center">No</th>
-                    <th class="text-center">Nama Proyek</th>
-                    <th class="text-center">Nama Pelanggan</th>
-                    <th class="text-center">Batas Waktu</th>
-                 
+                    <th class="text-center">Nama Perusahaan</th>
+                    <th class="text-center">Nama Tender</th>
+                    <th class="text-center">Nama Barang</th>
+                    <th class="text-center">Harga</th>
+                    <th class="text-center">Stock</th>
+                    <th class="text-center">Pembayaran</th>
                     <th class="text-center" width="8%">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($tender ?? '' as $s)
+                @foreach($p ?? '' as $s)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$s->nama_proyek}}</td>
-                    <td>{{$s->nama_pelanggan}}</td>                 
-                    <td>{{$s->batas_waktu}}</td>                 
+                    <td>{{$s->user->nama_perusahaan}}</td>
+                    <td>{{$s->tender->nama_tender}}</td>                 
+                    <td>{{$s->nama_barang ?? '' }}</td>                 
+                    <td>{{$s->harga}}</td>                 
+                    <td>{{$s->stock}}</td> 
+                    <td>{{$s->pembayaran}}</td>                 
                     <td>
-                        <div class="btn-group">
-
-                            <!-- URL::to('/admin/category/detail.id='.$cate-id -->
-                           
-
+                        <div class="btn-group">                    
                             <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip"
                                 data-placement="bottom" title="Edit">
-                                <i class="fa fa-edit nav-icon"></i>
+                                <i class="fa fa-edit nav-icon">lihat</i>
                             </a>
-
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/user/{{$s->id}}/delete"
-                                class="btn btn btn-danger btn-sm">
-                                <i class="fa fa-trash nav-icon"></i>
-                            </a>
-
                         </div>
                     </td>
-
                 </tr>
                 @endforeach
             </tbody>

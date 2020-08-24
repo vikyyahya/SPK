@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row">
+<div class="row m-3">
 	<div class="col-md-12">
 		<form action="/createuser" method="POST">
 
