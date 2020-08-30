@@ -36,10 +36,17 @@ class PenawaranHargaController extends Controller
             ['id' => '2', 'name' => 'tempo 30 hari'],
             ['id' => '2', 'name' => 'tempo 60 hari'],
         ]);
+        $kualitases = collect([
+            ['id' => '1', 'name' => 'bagus'],
+            ['id' => '2', 'name' => 'sedang'],
+            ['id' => '3', 'name' => 'rendah'],
+        ]);
+
         $tender = Tender::pluck('nama_tender', 'id');
         $stock = $stocks->pluck('name','name');
+        $kualitas = $kualitases->pluck('name','name');
         $pembayaran = $pembayarans->pluck('name','name');
-        return view('penawaran_harga.formpenawaranharga',['tender' => $tender,'user' => $user,'stock' => $stock,'pembayaran' => $pembayaran]);
+        return view('penawaran_harga.formpenawaranharga',['kualitas' => $kualitas,'tender' => $tender,'user' => $user,'stock' => $stock,'pembayaran' => $pembayaran]);
     }
 
     public function create(Request $request)
@@ -55,10 +62,11 @@ class PenawaranHargaController extends Controller
             'harga' => $data['harga'],
             'stock' => $data['stock'],
             'pembayaran' => $data['pembayaran'],
+            'kualitas' => $data['kualitas'],
         ]);
         }
 
-        return redirect('/users');
+        return redirect('/listpenawaranharga');
 
     }
 

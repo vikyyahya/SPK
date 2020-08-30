@@ -47,5 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
     Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
     Route::post('/creatpenawaran', 'PenawaranHargaController@create');
+    // perangkingan
+    Route::get('/perangkingan', 'PerangkinganController@perangkingan');
+    Route::get('/hitungperangkingan', 'PerangkinganController@hitung');
     
 });

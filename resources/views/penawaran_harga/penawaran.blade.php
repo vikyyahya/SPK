@@ -47,6 +47,7 @@
                     <th class="text-center">Harga</th>
                     <th class="text-center">Stock</th>
                     <th class="text-center">Pembayaran</th>
+                    <th class="text-center">Kualitas</th>
                     <th class="text-center" width="8%">Action</th>
                 </tr>
             </thead>
@@ -60,6 +61,7 @@
                     <td>{{$s->harga}}</td>                 
                     <td>{{$s->stock}}</td> 
                     <td>{{$s->pembayaran}}</td>                 
+                    <td>{{$s->kualitas}}</td>                 
                     <td>
                         <div class="btn-group">                    
                             <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip"

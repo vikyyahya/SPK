@@ -69,6 +69,11 @@
                     <div class="form-group">
 						<label>Pembayaran</label>
 						{{ Form::select('pembayaran', $pembayaran, null, ['placeholder' => 'Pilih pembayaran...', 'required', 'class' => 'form-control']) }}
+					</div>
+					
+					<div class="form-group">
+						<label>Kualitas</label>
+						{{ Form::select('kualitas', $kualitas, null, ['placeholder' => 'Pilih Kualitas...', 'required', 'class' => 'form-control']) }}
                     </div>
 
 					<div class="card-footer">
