@@ -18,36 +18,34 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users', 'UserController@user');
-Route::get('/adduser', 'UserController@add_user');
-Route::get('/edituser/{id}', 'UserController@editUser');
-Route::post('/createuser', 'UserController@create');
-Route::post('/upadateuser/{id}', 'UserController@update');
-Route::get('/user/{id}/delete', 'UserController@delete');
-// Tender
-Route::get('/tender', 'TenderController@tender');
-Route::get('/addtender', 'TenderController@addTender');
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-//bobot
-Route::get('/bobot', 'BobotController@index');
-Route::get('/addbobot', 'BobotController@addBobot');
-Route::post('/createbobot', 'BobotController@create');
-Route::get('/bobot/{id}/delete', 'BobotController@delete');
-Route::get('/editbobot/{id}', 'BobotController@edit');
-Route::post('/updatebobot/{id}', 'BobotController@update');
-
-//penawaran
-Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
-Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
-Route::post('/creatpenawaran', 'PenawaranHargaController@create');
-
-
-
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/users', 'UserController@user');
+    Route::get('/adduser', 'UserController@add_user');
+    Route::get('/edituser/{id}', 'UserController@editUser');
+    Route::post('/createuser', 'UserController@create');
+    Route::post('/upadateuser/{id}', 'UserController@update');
+    Route::get('/user/{id}/delete', 'UserController@delete');
+    // Tender
+    Route::get('/tender', 'TenderController@tender');
+    Route::get('/edittender/{id}', 'TenderController@edittender');
+    Route::get('/addtender', 'TenderController@addTender');
+    Route::post('/createtender', 'TenderController@create');
+    Route::post('/updatetender/{id}', 'TenderController@update');
+        
+    Route::get('/home', 'HomeController@index')->name('home');
+    
+    //bobot
+    Route::get('/bobot', 'BobotController@index');
+    Route::get('/addbobot', 'BobotController@addBobot');
+    Route::post('/createbobot', 'BobotController@create');
+    Route::get('/bobot/{id}/delete', 'BobotController@delete');
+    Route::get('/editbobot/{id}', 'BobotController@edit');
+    Route::post('/updatebobot/{id}', 'BobotController@update');
+    
+    //penawaran
+    Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
+    Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
+    Route::post('/creatpenawaran', 'PenawaranHargaController@create');
+    
+});

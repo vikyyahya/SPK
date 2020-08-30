@@ -44,7 +44,7 @@ class BobotController extends Controller
 
     public function addBobot()
     {
-        $tender = Tender::pluck('nama_proyek', 'id');
+        $tender = Tender::pluck('nama_tender', 'id');
         $kategories = collect([
             ['id' => '1', 'name' => 'Benefit'],
             ['id' => '2', 'name' => 'Cost'],
@@ -83,14 +83,20 @@ class BobotController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'tender' => 'nullable',
-            'deskripsi' => 'nullable',
-            'nilai' => 'nullable',
-            'kategori' => 'nullable',
+            'tender' => 'required',
+            'deskripsi' => 'required',
+            'nilai' => 'required',
+            'kategori' => 'required',
         ]);
+        //cek bobot
+        $bobot= Bobot::where([['id_tender','=',$request->tender],['deskripsi','=',$request->deskripsi]])->get();
+        // return count($bobot) ;
+        if(count($bobot) != 0){
+            // return Redirect::back()->withErrors();
+            return back()->withErrors(['message'=>'Deskripsi sudah di gunakan']);
+        }
 
         $data = $request->all();
-
         Bobot::create([
             'deskripsi' => $data['deskripsi'],
             'kategori' =>  "Benefit",

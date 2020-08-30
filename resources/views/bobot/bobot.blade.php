@@ -23,19 +23,15 @@
 
 <br/>
 
-<a href="#" class="btn btn-success" data-toggle="tooltip" title="Print"
-    onclick="">
-    <i class="fas fa-print"></i>
-</a>
 
-<a href="/addbobot" class="btn btn-primary">
-    <i class="fa fa-plus nav-icon"></i>
+<a href="/addbobot" class="btn btn-primary ml-3">
+    <i class="fa fa-plus nav-icon">Tambah Bobot</i>
 </a>
 
 <br/>
 <br/>
 
-<div class="card .mt-3" style="border-top: 2px solid">
+<div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
         <h4>User</h4>
@@ -46,10 +42,10 @@
             <thead >
                 <tr>
                     <th class="text-center">No</th>
+                    <th class="text-center">Nama Tender</th>
                     <th class="text-center">Deskripsi</th>
                     <th class="text-center">Nilai Bobot</th>
                     <th class="text-center">Kategori</th>
-                    <th class="text-center">Nama Tender</th>
                  
                     <th class="text-center" width="8%">Action</th>
                 </tr>
@@ -58,10 +54,10 @@
                 @foreach($bobot ?? '' as $s)
                 <tr>
                     <td>{{$loop->iteration}}</td>
+                    <td>{{$s->tender->nama_tender}}</td>                 
                     <td>{{$s->deskripsi}}</td>
                     <td>{{$s->nilai}}</td>    
                     <td>{{$s->kategori}}</td>                 
-                    <td>{{$s->tender->nama_proyek}}</td>                 
 
                     <td>
                         <div class="btn-group">

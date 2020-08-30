@@ -24,18 +24,21 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Admin</b>LTE</a>
+    <a href="#">PT Powertek Indonesia</a>
   </div>
   <!-- /.login-logo -->
 
-  <div class="card">
+  <div class="card card-info">
+  <div class="card-header">
+                <h3 class="card-title">Login</h3>
+              </div>
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
       <form action="{{ route('login') }}" method="post">
       @csrf
 
-      <label for="email" class="text-md-right">{{ __('E-Mail Address') }}</label>
+      <label for="email" class="text-md-right">{{ __('E-Mail ') }}</label>
         <div class="input-group mb-3">
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
         @error('email')
@@ -71,18 +74,18 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-info btn-block">Masuk</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
      
-      <p class="mb-1">
+      <!-- <p class="mb-1">
         <a href="{{ route('password.request') }}">I forgot my password</a>
-      </p>
+      </p> -->
       <p class="mb-0">
-        <a href="/register" class="text-center">Register a new membership</a>
+        <a href="/register" class="text-center">Daftar akun baru</a>
       </p>
     </div>
     <!-- /.login-card-body -->

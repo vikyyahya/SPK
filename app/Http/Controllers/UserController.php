@@ -28,7 +28,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'name' => 'nullable',
+            'name' => 'required',
             'email' => 'unique:users,email',
             'password' => ['required', 'string', 'min:8'],
             'level' => 'nullable'

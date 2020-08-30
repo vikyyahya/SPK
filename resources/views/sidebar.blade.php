@@ -42,7 +42,11 @@
 
 
           <li class="nav-item has-treeview menu-open mt-2">
-            <a href="/bobot" class="nav-link">
+          @if (Request::is('bobot'))
+          <a href="/bobot" class="nav-link active">
+          @else
+          <a href="/bobot" class="nav-link">
+          @endif
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 KELOLA BOBOT
@@ -62,8 +66,12 @@
 
 
           <li class="nav-item has-treeview menu-open mt-2">
-            <a href="/listpenawaranharga" class="nav-link">
-              <i class="nav-icon fas fa-poll-h"></i>
+          @if (Request::is('listpenawaranharga'))
+          <a href="/listpenawaranharga" class="nav-link active">
+          @else
+          <a href="/listpenawaranharga" class="nav-link">
+          @endif             
+          <i class="nav-icon fas fa-poll-h"></i>
               <p>
                 PENAWARAN HARGA
               </p>

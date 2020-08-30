@@ -28,106 +28,101 @@
   </div>
   <!-- /.login-logo -->
 
-  <div class="card ">
+  <div class="card ml-5 mr-5">
     <div class="card-body">
-      <p class="login-box-msg">Register a new membership</p>
-
-      <form  method="POST" action="{{ route('register') }}">
-      @csrf
-
-      <label for="name" class=" text-md-right">{{ __('Name') }}</label>
-        <!-- <div class="input-group mb-3">
-        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-
-        <label for="email" class="text-md-right">{{ __('E-Mail Address') }}</label>
-        <div class="input-group mb-3">
-        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-
-        <label for="password" class="text-md-right">{{ __('Password') }}</label>
-        <div class="input-group mb-3">
-        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-        <label for="password-confirm" class="text-md-right">{{ __('Confirm Password') }}</label>
-        <div class="input-group mb-3">
-        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div> -->
-
-        <div class="card card-info">
+        <div class="card card-info ml-5 mr-5">
               <div class="card-header">
-                <h3 class="card-title">Horizontal Form</h3>
+                <h3 class="card-title">Form Daftar</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form-horizontal">
+              <form class="form-horizontal"  method="POST" action="{{ route('register') }}" >
+                @csrf
+					      @if($errors->any())
+                <div class="alert alert-danger">
+						      {{implode('', $errors->all(':message'))}}
+					      </div>
+      					@endif
+
                 <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
+                    <div class="col-sm-10">
+                      <input type="text" value="{{ old('name')}}" require class="form-control" name="name">
+                    </div>
+                  </div>
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                      <input type="email" value="{{ old('email')}}" require class="form-control" name="email" >
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                      <input type="password" value="" require class="form-control" name="password" placeholder="Password">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Ulangi Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" require class="form-control" name="password_confirmation" >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nama Perusahaan</label>
+                    <div class="col-sm-10">
+                      <input type="text" value="{{ old('nama_perusahaan')}}" class="form-control" name="nama_perusahaan" placeholder="" require>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Produk</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="produk" value="{{ old('produk')}}"  placeholder="" require>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">No Telepon</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="no_telp" value="{{ old('no_telp')}}" placeholder="" require>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                        <label class="form-check-label" for="exampleCheck2">Remember me</label>
-                      </div>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">NPWP</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="npwp" value="{{ old('npwp')}}" placeholder="" require>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Alamat Perusahaan</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="alamat_perusahaan" value="{{ old('alamat_perusahaan')}}" placeholder="" require>
                     </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-info">Sign in</button>
-                  <button type="submit" class="btn btn-default float-right">Cancel</button>
+                  <button type="submit" class="btn btn-info btn-block">Daftar</button>
                 </div>
                 <!-- /.card-footer -->
               </form>
             </div>
             
-        <div class="row">
+        <div class="row ml-5 mr-5">
           <div class="col-8">
                       </div>
           <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-          </div>
+          <!-- <div class="col-4">
+            <button type="submit" class="btn btn-info btn-block">Daftar</button>
+          </div> -->
           <!-- /.col -->
-        </div>
-     
-     
-     
-      </form>
-
-      <a href="/login" class="text-center">I already have a membership</a>
+        </div> 
+      <a href="/login" class="text-center ml-5">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

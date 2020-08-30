@@ -41,6 +41,7 @@
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama Proyek</th>
+                    <th class="text-center">Nama Tender</th>
                     <th class="text-center">Nama Pelanggan</th>
                     <th class="text-center">Batas Waktu</th>
                  
@@ -52,6 +53,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$s->nama_proyek}}</td>
+                    <td>{{$s->nama_tender}}</td>
                     <td>{{$s->nama_pelanggan}}</td>                 
                     <td>{{$s->batas_waktu}}</td>                 
                     <td>
@@ -60,7 +62,7 @@
                             <!-- URL::to('/admin/category/detail.id='.$cate-id -->
                            
 
-                            <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip"
+                            <a href="/edittender/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip"
                                 data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
