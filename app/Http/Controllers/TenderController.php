@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Tender;
 
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class TenderController extends Controller
         return redirect('/tender')->with('sukses', 'Data Berhasil Di Input!');
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $tender = Tender::find($id);
 
@@ -61,4 +62,10 @@ class TenderController extends Controller
         return redirect('/tender')->with('sukses', 'Data Berhasil Di Ubah!');
     }
 
+    public function delete($id)
+    {
+        $tender = Tender::find($id);
+        $tender->delete();
+        return redirect('/tender')->with('sukses', 'Data berhasil dihapus!');
+    }
 }

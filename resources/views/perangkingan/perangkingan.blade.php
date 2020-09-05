@@ -21,7 +21,7 @@
     <i class="fas fa-file-excel"></i> Import Excel
 </button> --}}
 
-<br/>
+<br />
 
 <!-- <a href="/addtender" class="btn btn-primary ml-3">
     <i class="fa fa-plus nav-icon">
@@ -35,59 +35,39 @@
         <h4>Perngkingan</h4>
         <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                    <div class="input-group-append">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <div class="input-group-append">
                     <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                </div>
             </div>
+        </div>
+
+        <div class="card-body mt-4">
+            <table class="table table-striped table-bordered" id="myTable">
+                <thead>
+                    <tr>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Nama Proyek</th>
+                        <th class="text-center">Nama Tender</th>
+                        <th class="text-center">Nama Pelanggan</th>
+                        <th class="text-center">Batas Waktu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($tender ?? '' as $s)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$s->nama_proyek}}</td>
+                        <td>{{$s->nama_tender}}</td>
+                        <td>{{$s->nama_pelanggan}}</td>
+                        <td>{{$s->batas_waktu}}</td>
+
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div class="card-body mt-4">
-        <table class="table table-striped table-bordered" id="myTable">
-            <thead >
-                <tr>
-                    <th class="text-center">No</th>
-                    <th class="text-center">Nama Proyek</th>
-                    <th class="text-center">Nama Tender</th>
-                    <th class="text-center">Nama Pelanggan</th>
-                    <th class="text-center">Batas Waktu</th>
-                 
-                    <th class="text-center" width="8%">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($tender ?? '' as $s)
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$s->nama_proyek}}</td>
-                    <td>{{$s->nama_tender}}</td>
-                    <td>{{$s->nama_pelanggan}}</td>                 
-                    <td>{{$s->batas_waktu}}</td>                 
-                    <td>
-                        <div class="btn-group">
 
-                            <!-- URL::to('/admin/category/detail.id='.$cate-id -->
-                           
-
-                            <a href="/edittender/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip"
-                                data-placement="bottom" title="Edit">
-                                <i class="fa fa-edit nav-icon"></i>
-                            </a>
-
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/user/{{$s->id}}/delete"
-                                class="btn btn btn-danger btn-sm">
-                                <i class="fa fa-trash nav-icon"></i>
-                            </a>
-
-                        </div>
-                    </td>
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-@endsection
+    @endsection

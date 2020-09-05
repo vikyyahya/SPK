@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/users', 'UserController@user');
     Route::get('/adduser', 'UserController@add_user');
@@ -32,9 +34,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/addtender', 'TenderController@addTender');
     Route::post('/createtender', 'TenderController@create');
     Route::post('/updatetender/{id}', 'TenderController@update');
-        
+    Route::get('/tender/{id}/delete', 'TenderController@delete');
+
     Route::get('/home', 'HomeController@index')->name('home');
-    
+
     //bobot
     Route::get('/bobot', 'BobotController@index');
     Route::get('/addbobot', 'BobotController@addBobot');
@@ -42,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bobot/{id}/delete', 'BobotController@delete');
     Route::get('/editbobot/{id}', 'BobotController@edit');
     Route::post('/updatebobot/{id}', 'BobotController@update');
-    
+
     //penawaran
     Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
     Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
@@ -50,5 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
     // perangkingan
     Route::get('/perangkingan', 'PerangkinganController@perangkingan');
     Route::get('/hitungperangkingan', 'PerangkinganController@hitung');
-    
+
+    //Suplier
+    Route::get('/suplier', 'SuplierController@suplier');
 });

@@ -21,11 +21,11 @@
     <i class="fas fa-file-excel"></i> Import Excel
 </button> --}}
 
-<br/>
+<br />
 
 <a href="/addtender" class="btn btn-primary ml-3">
     <i class="fa fa-plus nav-icon">
-    Tambah Tender
+        Tambah Tender
     </i>
 </a>
 
@@ -37,14 +37,14 @@
 
     <div class="card-body">
         <table class="table table-striped table-bordered" id="myTable">
-            <thead >
+            <thead>
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama Proyek</th>
                     <th class="text-center">Nama Tender</th>
                     <th class="text-center">Nama Pelanggan</th>
                     <th class="text-center">Batas Waktu</th>
-                 
+
                     <th class="text-center" width="8%">Action</th>
                 </tr>
             </thead>
@@ -54,21 +54,19 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$s->nama_proyek}}</td>
                     <td>{{$s->nama_tender}}</td>
-                    <td>{{$s->nama_pelanggan}}</td>                 
-                    <td>{{$s->batas_waktu}}</td>                 
+                    <td>{{$s->nama_pelanggan}}</td>
+                    <td>{{$s->batas_waktu}}</td>
                     <td>
                         <div class="btn-group">
 
                             <!-- URL::to('/admin/category/detail.id='.$cate-id -->
-                           
 
-                            <a href="/edittender/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip"
-                                data-placement="bottom" title="Edit">
+
+                            <a href="/edittender/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/user/{{$s->id}}/delete"
-                                class="btn btn btn-danger btn-sm">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/tender/{{$s->id}}/delete" class="btn btn btn-danger btn-sm">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 
