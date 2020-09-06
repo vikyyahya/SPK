@@ -21,15 +21,15 @@
     <i class="fas fa-file-excel"></i> Import Excel
 </button> --}}
 
-<br/>
+<br />
 
 
 <a href="/addbobot" class="btn btn-primary ml-3">
     <i class="fa fa-plus nav-icon">Tambah Bobot</i>
 </a>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <div class="card m-3" style="border-top: 2px solid">
 
@@ -39,14 +39,14 @@
 
     <div class="card-body">
         <table class="table table-striped table-bordered" id="myTable">
-            <thead >
+            <thead>
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama Tender</th>
                     <th class="text-center">Deskripsi</th>
                     <th class="text-center">Nilai Bobot</th>
                     <th class="text-center">Kategori</th>
-                 
+
                     <th class="text-center" width="8%">Action</th>
                 </tr>
             </thead>
@@ -54,24 +54,22 @@
                 @foreach($bobot ?? '' as $s)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$s->tender->nama_tender}}</td>                 
+                    <td>{{$s->tender->nama_tender ?? ''}}</td>
                     <td>{{$s->deskripsi}}</td>
-                    <td>{{$s->nilai}}</td>    
-                    <td>{{$s->kategori}}</td>                 
+                    <td>{{$s->nilai}}</td>
+                    <td>{{$s->kategori}}</td>
 
                     <td>
                         <div class="btn-group">
 
                             <!-- URL::to('/admin/category/detail.id='.$cate-id -->
-                           
 
-                            <a href="/editbobot/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip"
-                                data-placement="bottom" title="Edit">
+
+                            <a href="/editbobot/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/bobot/{{$s->id}}/delete"
-                                class="btn btn btn-danger btn-sm">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/bobot/{{$s->id}}/delete" class="btn btn btn-danger btn-sm">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 

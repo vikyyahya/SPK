@@ -10,13 +10,17 @@ class Bobot extends Model
     public $table = "bobot";
 
     protected $fillable = [
-        'deskripsi', 'kategori', 'nilai','id_tender',
+        'deskripsi', 'kategori', 'nilai', 'id_tender',
     ];
 
 
-  public function tender()
+    public function tender()
     {
-        return $this->belongsTo('App\Tender', 'id_tender', 'id');
+        return $this->belongsTo('App\Tender', 'id_tender', 'id')->withTrashed();
     }
 
+    public function kriterias()
+    {
+        return $this->belongsTo('App\Kriteria', 'id_kriteria', 'id');
+    }
 }

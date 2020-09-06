@@ -83,12 +83,16 @@
 
 
         <li class="nav-item has-treeview menu-open mt-2">
-          <a href="/perangkingan" class="nav-link">
-            <i class="nav-icon fas fa-chart-line"></i>
-            <p>
-              PERANGKINGAN
-            </p>
-          </a>
+          @if (Request::is('perangkingan'))
+          <a href="/perangkingan" class="nav-link active">
+            @else
+            <a href="/perangkingan" class="nav-link">
+              @endif
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                PERANGKINGAN
+              </p>
+            </a>
         </li>
 
 

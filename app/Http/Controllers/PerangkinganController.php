@@ -8,6 +8,7 @@ use App\Bobot;
 use App\Penawaran;
 use App\User;
 use App\Tender;
+use App\Vektor;
 use \stdClass;
 
 
@@ -34,28 +35,30 @@ class PerangkinganController extends Controller
     {
         $id = "1"; //id tender
         $bobot = Bobot::all();
-        $bobotrata = Bobot::where('id_tender', $id)->get();
+        $bobotrata = Bobot::where('id_tender', $id)->with(['kriterias'])->get();
         $penawaran = Penawaran::where('id_tender', $id)->get();
 
         // cari rata2 
         //sum value
-        $jmlbobot = Bobot::where('id_tender', $id)->sum('nilai');
+        $jmlbobot = Bobot::where('id_tender', $id)->with(['kriterias'])->sum('nilai');
         //cari rata2 kriteria
         $rkriteria = new stdClass();
         foreach ($bobotrata as $bobot) {
-            $rata2 = $bobot->nilai / $jmlbobot;
+            $rata2 = $bobot->kriterias->nilai / $jmlbobot;
             // array_push($rkriteria,[$bobot->deskripsi => $rata2 ]);
-            $variable = $bobot->deskripsi;
+            $variable = $bobot->kriterias->kriteria;
             $rkriteria->$variable = $rata2;
         }
-
+        // return print_r($rkriteria);
         //pangkat value
-        $vektors = [];
+        $vektors = array();
 
         foreach ($penawaran as $pen) {
             $jangPembayaran = $pen->pembayaran;
+            $stc = $pen->stock;
             $kualitas = $pen->kualitas;
             $vpembayaran = '';
+            $vstock = '';
             $vkualitas = '';
             if ($jangPembayaran == 'cash') {
                 $vpembayaran = 1;
@@ -65,6 +68,11 @@ class PerangkinganController extends Controller
                 $vpembayaran = 3;
             } else if ($jangPembayaran == 'tempo 60 hari') {
                 $vpembayaran = 4;
+            }
+            if ($stc == 'stock') {
+                $vstock = 2;
+            } else {
+                $vstock = 1;
             }
             if ($kualitas == 'bagus') {
                 $vkualitas = 3;
@@ -76,14 +84,34 @@ class PerangkinganController extends Controller
 
             $hasilpembayaran = "";
             $totalVektor = "";
+            //vektor s
             array_push($vektors, [
-                'id_iser' => $pen->id_user,
+                'id_user' => $pen->id_user,
                 'pembayaran' => pow($vpembayaran, $rkriteria->{'Jangka Waktu Pembayaran'}),
-                'harga' => pow($pen->harga, $rkriteria->{'Harga'}),
+                'harga' => pow($pen->harga, -$rkriteria->{'Harga'}),
                 'kualitas' => pow($vkualitas, $rkriteria->{'Kualitas'}),
-                'status_stock' => $vpembayaran / $rkriteria->{'Status Stok Barang'},
+                'status_stock' => pow($vstock, $rkriteria->{'Status Stok Barang'}),
+                'total_vektor_s' => pow($vpembayaran, $rkriteria->{'Jangka Waktu Pembayaran'})
+                    * pow($pen->harga, -$rkriteria->{'Harga'})
+                    * pow($vkualitas, $rkriteria->{'Kualitas'})
+                    * ($vpembayaran / $rkriteria->{'Status Stok Barang'})
             ]);
+            $item_vektor = [];
+            foreach ($bobotrata as $bobot) {
+                array_push($item_vektor, $bobot->kriterias->nilai);
+            }
+            // return $item_vektor;
+
+            //save to table vektor
+            foreach ($bobotrata as $v) {
+            }
         }
+
+        //total all vektor
+        // $total_all_vektor_s = '';
+
+
+        // return $bobotrata;
 
         return $vektors;
 
