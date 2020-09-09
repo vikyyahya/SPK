@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\User;
 use App\Level;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,8 @@ class UserController extends Controller
     //
     public function user()
     {
-        $users = User::all();
+        $users = User::paginate(5);
+        // return $users->link;
         return view('user.user', ['users' => $users]);
     }
 
@@ -22,7 +24,7 @@ class UserController extends Controller
         $users = User::all();
         $level = Level::pluck('nama_level', 'id');
 
-        return view('user.addUser', ['users' => $users,'level' => $level]);
+        return view('user.addUser', ['users' => $users, 'level' => $level]);
     }
 
     public function create(Request $request)
@@ -49,13 +51,13 @@ class UserController extends Controller
         return redirect('/users')->with('sukses', 'Data Berhasil Di Input!');
     }
 
-    public function editUser($id){
+    public function editUser($id)
+    {
         $level = Level::pluck('nama_level', 'id');
 
         $user = User::find($id);
 
-        return view('user.editUser',['user' => $user,'level' => $level]);
-
+        return view('user.editUser', ['user' => $user, 'level' => $level]);
     }
 
     public function delete($id)
@@ -64,20 +66,18 @@ class UserController extends Controller
         $user->delete($user);
         return redirect('/users')->with('sukses', 'Data berhasil dihapus!');
     }
-    
-    public function update(Request $request,$id)
+
+    public function update(Request $request, $id)
     {
         $user = User::find($id);
         $level = Level::pluck('nama_level', 'id');
-        if ($request->password != $request->syncpassword){
-            return view('user.editUser',['user' => $user,'level' => $level])->with('error', 'Password tidak sama');
-        }
-        else if ($request->password == '') {
+        if ($request->password != $request->syncpassword) {
+            return view('user.editUser', ['user' => $user, 'level' => $level])->with('error', 'Password tidak sama');
+        } else if ($request->password == '') {
             $user->update($request->except('password'));
         } else {
             $user->update($request->all());
         }
         return redirect('/users')->with('sukses', 'Data Berhasil Di Update!');
     }
-
 }

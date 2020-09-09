@@ -21,24 +21,32 @@
     <i class="fas fa-file-excel"></i> Import Excel
 </button> --}}
 
-<br/>
+<br />
 
 <a href="/penawaranharga" class="btn btn-primary ml-3">
     <i class="fa fa-plus nav-icon">Buat Penawaran</i>
 </a>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
         <h4>User</h4>
+        <div class="card-tools mr-1">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card-body">
         <table class="table table-striped table-bordered" id="myTable">
-            <thead >
+            <thead>
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama Perusahaan</th>
@@ -56,16 +64,15 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$s->user->nama_perusahaan}}</td>
-                    <td>{{$s->tender->nama_tender}}</td>                 
-                    <td>{{$s->nama_barang ?? '' }}</td>                 
-                    <td>{{$s->harga}}</td>                 
-                    <td>{{$s->stock}}</td> 
-                    <td>{{$s->pembayaran}}</td>                 
-                    <td>{{$s->kualitas}}</td>                 
+                    <td>{{$s->tender->nama_tender}}</td>
+                    <td>{{$s->nama_barang ?? '' }}</td>
+                    <td>{{$s->harga}}</td>
+                    <td>{{$s->stock}}</td>
+                    <td>{{$s->pembayaran}}</td>
+                    <td>{{$s->kualitas}}</td>
                     <td>
-                        <div class="btn-group">                    
-                            <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip"
-                                data-placement="bottom" title="Edit">
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon">lihat</i>
                             </a>
                         </div>
@@ -74,6 +81,11 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            {{$p->links()}}
+        </ul>
     </div>
 </div>
 

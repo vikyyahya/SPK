@@ -33,6 +33,14 @@
 
     <div class="card-header ">
         <h4>Tender</h4>
+        <div class="card-tools mr-1">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card-body">
@@ -77,6 +85,11 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            {{$tender->links()}}
+        </ul>
     </div>
 </div>
 

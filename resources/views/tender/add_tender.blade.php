@@ -22,13 +22,13 @@
 					@endif
 
 					<div class="form-group">
-						<label>Nama Proyek</label>
-						<input type="text" name="nama_proyek" value="{{ old('nama_proyek')}}"  placeholder="" class="form-control" required autofocus>
+						<label>Nama Tender</label>
+						<input type="text" name="nama_tender" value="{{ old('nama_tender')}}" placeholder="" class="form-control" required autofocus>
 					</div>
 
 					<div class="form-group">
-						<label>Nama Tender</label>
-						<input type="text" name="nama_tender" value="{{ old('nama_tender')}}" placeholder="" class="form-control" required autofocus>
+						<label>Nama Proyek</label>
+						<input type="text" name="nama_proyek" value="{{ old('nama_proyek')}}" placeholder="" class="form-control" required autofocus>
 					</div>
 
 					<div class="form-group">
@@ -38,9 +38,9 @@
 
 					<div class="form-group">
 						<label>Batas Waktu</label>
-                        <div class="input-group">
-						    <input type="date" name="batas_waktu" value="{{ old('batas_waktu')}}" placeholder="" class="form-control"  autofocus>
-					    </div>
+						<div class="input-group">
+							<input type="date" name="batas_waktu" value="{{ old('batas_waktu')}}" placeholder="" class="form-control" autofocus>
+						</div>
 					</div>
 
 

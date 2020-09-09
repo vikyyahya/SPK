@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Tender;
 use App\Bobot;
 use Illuminate\Http\Request;
@@ -10,12 +11,13 @@ class BobotController extends Controller
     //
     public function index()
     {
-        $bobot = Bobot::all();
+        $bobot = Bobot::paginate(5);
 
         return view('bobot.bobot', ['bobot' => $bobot]);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $bobot = Bobot::find($id);
         $tender = Tender::pluck('nama_proyek', 'id');
         $kategories = collect([
@@ -34,12 +36,11 @@ class BobotController extends Controller
             ['id' => '3', 'name' => '3'],
             ['id' => '4', 'name' => '4'],
         ]);
-        $kategori = $kategories->pluck('name','name');
-        $nilai = $nilais->pluck('name','name');
-        $deskripsi = $deskripsies->pluck('name','name');
+        $kategori = $kategories->pluck('name', 'name');
+        $nilai = $nilais->pluck('name', 'name');
+        $deskripsi = $deskripsies->pluck('name', 'name');
 
-        return view('bobot.editBobot',['bobot' => $bobot, 'kategori'=>$kategori,'deskripsi'=>$deskripsi, 'tender'=> $tender, 'nilai'=>$nilai]);
-
+        return view('bobot.editBobot', ['bobot' => $bobot, 'kategori' => $kategori, 'deskripsi' => $deskripsi, 'tender' => $tender, 'nilai' => $nilai]);
     }
 
     public function addBobot()
@@ -62,21 +63,20 @@ class BobotController extends Controller
             ['id' => '4', 'name' => '4'],
         ]);
 
-        $kategori = $kategories->pluck('name','name');
-        $nilai = $nilais->pluck('name','name');
-        $deskripsi = $deskripsies->pluck('name','name');
-        return view('bobot.addBobot',['kategori'=>$kategori,'deskripsi'=>$deskripsi, 'tender'=> $tender],['nilai'=>$nilai]);
-
+        $kategori = $kategories->pluck('name', 'name');
+        $nilai = $nilais->pluck('name', 'name');
+        $deskripsi = $deskripsies->pluck('name', 'name');
+        return view('bobot.addBobot', ['kategori' => $kategori, 'deskripsi' => $deskripsi, 'tender' => $tender], ['nilai' => $nilai]);
     }
 
-     
-    public function update(Request $request,$id)
+
+    public function update(Request $request, $id)
     {
         $bobot = Bobot::find($id);
         $tender = Tender::pluck('nama_proyek', 'id');
 
         $bobot->update($request->all());
-       
+
         return redirect('/bobot')->with('sukses', 'Data berhasil diupdate!');
     }
 
@@ -89,11 +89,11 @@ class BobotController extends Controller
             'kategori' => 'required',
         ]);
         //cek bobot
-        $bobot= Bobot::where([['id_tender','=',$request->tender],['deskripsi','=',$request->deskripsi]])->get();
+        $bobot = Bobot::where([['id_tender', '=', $request->tender], ['deskripsi', '=', $request->deskripsi]])->get();
         // return count($bobot) ;
-        if(count($bobot) != 0){
+        if (count($bobot) != 0) {
             // return Redirect::back()->withErrors();
-            return back()->withErrors(['message'=>'Deskripsi sudah di gunakan']);
+            return back()->withErrors(['message' => 'Deskripsi sudah di gunakan']);
         }
 
         $data = $request->all();
@@ -105,15 +105,12 @@ class BobotController extends Controller
         ]);
         return redirect('/bobot')->with('sukses', 'Data berhasil simpan!');
     }
-    
+
 
     public function delete($id)
     {
         $bobot = Bobot::find($id);
         $bobot->delete($bobot);
         return redirect('/bobot')->with('sukses', 'Data berhasil dihapus!');
-
     }
-
-
 }

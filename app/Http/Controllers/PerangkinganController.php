@@ -20,7 +20,7 @@ class PerangkinganController extends Controller
     public function perangkingan(Request $request)
     {
         $bobot = Bobot::all();
-        $tender = Tender::all();
+        $tender = Tender::paginate(5);
         $bobotrata = Bobot::where('id_tender', '1')->get();
         $penawaran = Penawaran::all();
 

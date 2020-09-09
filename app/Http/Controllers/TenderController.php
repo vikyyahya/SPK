@@ -12,7 +12,7 @@ class TenderController extends Controller
 
     public function tender()
     {
-        $tender = Tender::all();
+        $tender = Tender::paginate(5);
         return view('tender.tender', ['tender' => $tender]);
     }
 

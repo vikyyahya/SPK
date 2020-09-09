@@ -11,19 +11,21 @@ class PenawaranHargaController extends Controller
 {
     //
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
 
-    public function index(){
-        $p = Penawaran::all();
+    public function index()
+    {
+        $p = Penawaran::paginate(5);
         return view('penawaran_harga.penawaran', ['p' => $p]);
     }
 
     public function penawaranharga()
     {
-        if (Auth::check()){
+        if (Auth::check()) {
             $user = Auth::user();
         }
         $stocks = collect([
@@ -43,31 +45,30 @@ class PenawaranHargaController extends Controller
         ]);
 
         $tender = Tender::pluck('nama_tender', 'id');
-        $stock = $stocks->pluck('name','name');
-        $kualitas = $kualitases->pluck('name','name');
-        $pembayaran = $pembayarans->pluck('name','name');
-        return view('penawaran_harga.formpenawaranharga',['kualitas' => $kualitas,'tender' => $tender,'user' => $user,'stock' => $stock,'pembayaran' => $pembayaran]);
+        $stock = $stocks->pluck('name', 'name');
+        $kualitas = $kualitases->pluck('name', 'name');
+        $pembayaran = $pembayarans->pluck('name', 'name');
+        return view('penawaran_harga.formpenawaranharga', ['kualitas' => $kualitas, 'tender' => $tender, 'user' => $user, 'stock' => $stock, 'pembayaran' => $pembayaran]);
     }
 
     public function create(Request $request)
     {
-        if (Auth::check()){
+        if (Auth::check()) {
             $user = Auth::user();
             $data = $request->all();
             // return $request;
-        Penawaran::create([
-            'id_user' => $user->id,
-            'id_tender' => $data['id_tender'],
-            'nama_barang' => $data['nama_barang'],
-            'harga' => $data['harga'],
-            'stock' => $data['stock'],
-            'pembayaran' => $data['pembayaran'],
-            'kualitas' => $data['kualitas'],
-        ]);
+            Penawaran::create([
+                'id_user' => $user->id,
+                'id_tender' => $data['id_tender'],
+                'nama_barang' => $data['nama_barang'],
+                'harga' => $data['harga'],
+                'stock' => $data['stock'],
+                'pembayaran' => $data['pembayaran'],
+                'kualitas' => $data['kualitas'],
+            ]);
         }
 
         return redirect('/listpenawaranharga');
-
     }
 
     public function datapenawaran()
@@ -75,7 +76,4 @@ class PenawaranHargaController extends Controller
         $penawaran = Penawaran::all();
         return view('user.user', ['penawaran' => $penawaran]);
     }
-
-
-
 }
