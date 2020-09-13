@@ -33,7 +33,7 @@
 <div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
-        <h4>User</h4>
+        <h4>Penawaran</h4>
         <div class="card-tools mr-1">
             <div class="input-group input-group-sm" style="width: 150px;">
                 <input type="text" name="table_search" class="form-control float-right" placeholder="Search">

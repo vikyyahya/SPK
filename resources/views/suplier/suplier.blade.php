@@ -22,10 +22,6 @@
 <!-- <a href="/adduser" class="btn btn-primary ml-3">
     <i class="fa fa-plus nav-icon">Tambah Suplier</i>
 </a> -->
-
-<br />
-<br />
-
 <div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
@@ -51,7 +47,8 @@
                     <th class="text-center">Produk</th>
                     <th class="text-center">Alamat Perusahaan</th>
                     <th class="text-center">No Telepon</th>
-                    <!-- <th class="text-center" width="8%">Action</th> -->
+                    <th class="text-center">NPWP</th>
+                    <th class="text-center" width="8%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,6 +61,22 @@
                     <td>{{$s->produk}}</td>
                     <td>{{$s->alamat_perusahaan}}</td>
                     <td>{{$s->no_telp}}</td>
+                    <td>{{$s->npwp}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <!-- URL::to('/admin/category/detail.id='.$cate-id -->
+
+                            <a href="/editsuplier/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
+                                <i class="fa fa-edit nav-icon"></i>
+                            </a>
+
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/suplier/{{$s->id}}/delete" class="btn btn btn-danger btn-sm">
+                                <i class="fa fa-trash nav-icon"></i>
+                            </a>
+
+                        </div>
+                    </td>
+
 
                 </tr>
                 @endforeach

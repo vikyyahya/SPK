@@ -19,6 +19,16 @@ class UserController extends Controller
         return view('user.user', ['users' => $users]);
     }
 
+
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+
+        $users = User::where('name', 'like', "%" . $cari . "%")->paginate(5);
+        // return $users->link;
+        return view('user.user', ['users' => $users]);
+    }
+
     public function add_user()
     {
         $users = User::all();
@@ -69,14 +79,21 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $errors = new \Illuminate\Support\MessageBag();
+        $errors->add('Error', 'Konfirmasi password tidak sama');
+
         $user = User::find($id);
         $level = Level::pluck('nama_level', 'id');
         if ($request->password != $request->syncpassword) {
+            return redirect()->back()->withErrors($errors);;
             return view('user.editUser', ['user' => $user, 'level' => $level])->with('error', 'Password tidak sama');
         } else if ($request->password == '') {
             $user->update($request->except('password'));
         } else {
-            $user->update($request->all());
+            $pass =  Hash::make($request->password);
+            $user->update($request->except('password'));
+            $user->password = $pass;
+            $user->save();
         }
         return redirect('/users')->with('sukses', 'Data Berhasil Di Update!');
     }

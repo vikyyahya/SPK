@@ -34,12 +34,15 @@
     <div class="card-header ">
         <h4>Tender</h4>
         <div class="card-tools mr-1">
-            <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+            <form action="/tender/cari" method="GET">
+                @csrf
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

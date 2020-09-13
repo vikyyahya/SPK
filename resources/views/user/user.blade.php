@@ -16,27 +16,27 @@
     <i class="icon fas fa-check"></i> {{ $sukses }}
 </div>
 @endif
-<br />
 
-
-<a href="/adduser" class="btn btn-primary ml-3">
+<a href="/adduser" class="btn btn-primary ml-3 mt-3">
     <i class="fa fa-plus nav-icon">Tambah User</i>
 </a>
 
-<br />
-<br />
 
 <div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
         <h4>User</h4>
         <div class="card-tools mr-1">
-            <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+            <form action="/users/cari" method="GET">
+                @csrf
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" value="cari" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     </div>
 

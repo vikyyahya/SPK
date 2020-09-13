@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/users', 'UserController@user');
+    Route::get('/users/cari', 'UserController@cari');
     Route::get('/adduser', 'UserController@add_user');
     Route::get('/edituser/{id}', 'UserController@editUser');
     Route::post('/createuser', 'UserController@create');
@@ -30,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/{id}/delete', 'UserController@delete');
     // Tender
     Route::get('/tender', 'TenderController@tender');
+    Route::get('/tender/cari', 'TenderController@cari');
     Route::get('/edittender/{id}', 'TenderController@edittender');
     Route::get('/addtender', 'TenderController@addTender');
     Route::post('/createtender', 'TenderController@create');
@@ -40,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //bobot
     Route::get('/bobot', 'BobotController@index');
+    Route::get('/bobot/cari', 'BobotController@cari');
     Route::get('/addbobot', 'BobotController@addBobot');
     Route::post('/createbobot', 'BobotController@create');
     Route::get('/bobot/{id}/delete', 'BobotController@delete');
@@ -56,4 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Suplier
     Route::get('/suplier', 'SuplierController@suplier');
+    Route::get('/suplier/{id}/delete', 'SuplierController@delete');
+    Route::get('/editsuplier/{id}', 'SuplierController@edit');
+    Route::post('/updatesuplier/{id}', 'SuplierController@update');
 });

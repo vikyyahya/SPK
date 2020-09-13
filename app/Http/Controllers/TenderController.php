@@ -15,6 +15,14 @@ class TenderController extends Controller
         $tender = Tender::paginate(5);
         return view('tender.tender', ['tender' => $tender]);
     }
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+        $tender = Tender::where('nama_proyek', 'like', "%" . $cari . "%")
+            ->orwhere('nama_pelanggan', 'like', "%" . $cari . "%")
+            ->orwhere('nama_tender', 'like', "%" . $cari . "%")->paginate(5);
+        return view('tender.tender', ['tender' => $tender]);
+    }
 
     public function edittender($id)
     {

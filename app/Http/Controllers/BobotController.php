@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tender;
+use App\Kriteria;
 use App\Bobot;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,20 @@ class BobotController extends Controller
     public function index()
     {
         $bobot = Bobot::paginate(5);
+
+        return view('bobot.bobot', ['bobot' => $bobot]);
+    }
+
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+        $bobot = Bobot::with('tender')->with('kriterias')
+            ->wherehas('tender', function ($q)  use ($cari) {
+                $q->where('nama_tender', 'like', "%" . $cari . "%");
+            })->orwherehas('kriterias', function ($q)  use ($cari) {
+                $q->where('deskripsi', 'like', "%" . $cari . "%");
+            })->paginate(5);
+        return $bobot;
 
         return view('bobot.bobot', ['bobot' => $bobot]);
     }
