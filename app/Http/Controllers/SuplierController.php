@@ -13,6 +13,18 @@ class SuplierController extends Controller
         $users = User::where('level', '2')->paginate(5);
         return view('suplier.suplier', ['users' => $users]);
     }
+
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+
+        $users = User::where('name', 'like', "%" . $cari . "%")
+            ->orwhere('email', 'like', "%" . $cari . "%")
+            ->paginate(5);
+        // return $users->link;
+        return view('suplier.suplier', ['users' => $users]);
+    }
+
     public function edit($id)
     {
         $users = User::find($id);

@@ -53,9 +53,16 @@ class PenawaranHargaController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            "file" => "required|mimes:pdf|max:10000"
+        ]);
         if (Auth::check()) {
             $user = Auth::user();
             $data = $request->all();
+            $date_time = date("Y-m-d h:i:s a", time());
+            $fileName =  Auth::user()->id . $date_time . '.' . $request->file->extension();
+            $request->file->move(public_path('uploads'), $fileName);
+
             // return $request;
             Penawaran::create([
                 'id_user' => $user->id,
@@ -65,6 +72,7 @@ class PenawaranHargaController extends Controller
                 'stock' => $data['stock'],
                 'pembayaran' => $data['pembayaran'],
                 'kualitas' => $data['kualitas'],
+                'nama_dokumen' => $fileName,
             ]);
         }
 
@@ -75,5 +83,12 @@ class PenawaranHargaController extends Controller
     {
         $penawaran = Penawaran::all();
         return view('user.user', ['penawaran' => $penawaran]);
+    }
+
+    public function preview($id)
+    {
+        $penawaran = Penawaran::find($id);
+        $nama_dok =  $penawaran->nama_dokumen;
+        return view('penawaran_harga.previewpenawaran', ['penawaran' => $nama_dok]);
     }
 }

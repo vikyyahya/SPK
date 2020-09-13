@@ -72,7 +72,7 @@
                     <td>{{$s->kualitas}}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
+                            <a href="/previewpenawaran/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon">lihat</i>
                             </a>
                         </div>

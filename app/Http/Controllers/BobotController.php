@@ -26,7 +26,6 @@ class BobotController extends Controller
             })->orwherehas('kriterias', function ($q)  use ($cari) {
                 $q->where('deskripsi', 'like', "%" . $cari . "%");
             })->paginate(5);
-        return $bobot;
 
         return view('bobot.bobot', ['bobot' => $bobot]);
     }

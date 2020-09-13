@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     //penawaran
     Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
     Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
+    Route::get('/previewpenawaran/{id}', 'PenawaranHargaController@preview');
     Route::post('/creatpenawaran', 'PenawaranHargaController@create');
     // perangkingan
     Route::get('/perangkingan', 'PerangkinganController@perangkingan');
@@ -62,4 +63,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/suplier/{id}/delete', 'SuplierController@delete');
     Route::get('/editsuplier/{id}', 'SuplierController@edit');
     Route::post('/updatesuplier/{id}', 'SuplierController@update');
+    Route::get('/suplier/cari', 'SuplierController@cari');
 });
