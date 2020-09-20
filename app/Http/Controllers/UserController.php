@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Level;
 use Illuminate\Support\Facades\Hash;
-
+use App\Exports\UserReport;
+use Barryvdh\DomPDF\Facade as PDF;
 
 use Illuminate\Http\Request;
 
@@ -96,5 +97,14 @@ class UserController extends Controller
             $user->save();
         }
         return redirect('/users')->with('sukses', 'Data Berhasil Di Update!');
+    }
+    public function export_excel()
+    {
+        $users = User::all();
+        $pdf = PDF::loadview('report.reportuser', ['users' => $users]);
+        return $pdf->download('laporan-user-pdf');
+
+        // return $users;
+        // return (new UserReport($users))->download('users.xlsx');
     }
 }

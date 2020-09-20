@@ -16,16 +16,17 @@
     <i class="icon fas fa-check"></i> {{ $sukses }}
 </div>
 @endif
-<br />
 
+<a href="/export_suplier" class="btn btn-success  ml-3 mt-3">
+    <i class="fa fa-print nav-icon">
+        Cetak
+    </i>
+</a>
 
-<!-- <a href="/adduser" class="btn btn-primary ml-3">
-    <i class="fa fa-plus nav-icon">Tambah Suplier</i>
-</a> -->
 <div class="card m-3" style="border-top: 2px solid">
 
     <div class="card-header ">
-        <h4>User</h4>
+        <h4>Suplier</h4>
         <div class="card-tools mr-1">
             <form action="/suplier/cari" method="GET">
                 @csrf

@@ -21,9 +21,13 @@
     <i class="fas fa-file-excel"></i> Import Excel
 </button> --}}
 
-<br />
+<a href="/export_tender" class="btn btn-success  ml-3 mt-3">
+    <i class="fa fa-print nav-icon">
+        Cetak
+    </i>
+</a>
 
-<a href="/addtender" class="btn btn-primary ml-3">
+<a href="/addtender" class="btn btn-primary ml-3 mt-3">
     <i class="fa fa-plus nav-icon">
         Tambah Tender
     </i>

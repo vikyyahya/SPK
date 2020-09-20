@@ -9,7 +9,14 @@ use App\Penawaran;
 use App\User;
 use App\Tender;
 use App\Vektor;
+use Illuminate\Support\Facades\Auth;
 use \stdClass;
+use App\Exports\HasilRankingExport;
+use App\Exports\PerangkinganReport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 
 
@@ -23,17 +30,13 @@ class PerangkinganController extends Controller
         $tender = Tender::paginate(5);
         $bobotrata = Bobot::where('id_tender', '1')->get();
         $penawaran = Penawaran::all();
-
-
         // cari rata2 
-
-
         return view('perangkingan.perangkingan', ['tender' => $tender]);
     }
 
-    public function hitung(Request $request)
+    public function hitung(Request $request, $id)
     {
-        $id = "1"; //id tender
+        $id = $id; //id tender
         $bobot = Bobot::all();
         $bobotrata = Bobot::where('id_tender', $id)->with(['kriterias'])->get();
         $penawaran = Penawaran::where('id_tender', $id)->get();
@@ -52,7 +55,6 @@ class PerangkinganController extends Controller
         // return print_r($rkriteria);
         //pangkat value
         $vektors = array();
-
         foreach ($penawaran as $pen) {
             $jangPembayaran = $pen->pembayaran;
             $stc = $pen->stock;
@@ -87,10 +89,10 @@ class PerangkinganController extends Controller
             //vektor s
             array_push($vektors, [
                 'id_user' => $pen->id_user,
-                'pembayaran' => pow($vpembayaran, $rkriteria->{'Jangka Waktu Pembayaran'}),
-                'harga' => pow($pen->harga, -$rkriteria->{'Harga'}),
+                'jangka_waktu_pembayaran' => pow($vpembayaran, $rkriteria->{'Jangka Waktu Pembayaran'}),
                 'kualitas' => pow($vkualitas, $rkriteria->{'Kualitas'}),
-                'status_stock' => pow($vstock, $rkriteria->{'Status Stok Barang'}),
+                'harga' => pow($pen->harga, -$rkriteria->{'Harga'}),
+                'status_stok_barang' => pow($vstock, $rkriteria->{'Status Stok Barang'}),
                 'total_vektor_s' => pow($vpembayaran, $rkriteria->{'Jangka Waktu Pembayaran'})
                     * pow($pen->harga, -$rkriteria->{'Harga'})
                     * pow($vkualitas, $rkriteria->{'Kualitas'})
@@ -107,16 +109,45 @@ class PerangkinganController extends Controller
             }
         }
 
-        //total all vektor
-        // $total_all_vektor_s = '';
+        $sum_vektor_s = 0;
+        foreach ($vektors as $v) {
+            $object = (object) $v;
+            $sum_vektor_s +=  $object->total_vektor_s;
+        }
+        foreach ($vektors as $v) {
+            $object = (object) $v;
+            $id_penawaran = Penawaran::where('id_tender', $id)->where('id_user', $object->id_user)->first();
+            $vektor = Vektor::where('id_user', $object->id_user)->where('id_tender', $id)->get();
+            if (count($vektor) > 0) {
+                // return $vektor;
+                $vek =  Vektor::find($vektor[0]->id);
+                $vek->nilai = $object->total_vektor_s;
+                $vek->save();
+            } else {
+                Vektor::create([
+                    'id_user' => $object->id_user,
+                    'id_tender' => $id,
+                    'nilai' => $object->total_vektor_s / $sum_vektor_s
+                ]);
+            }
+        }
+
+        $data_vektor_s =  Vektor::where('id_tender', $id)->orderBy('nilai', 'desc')->paginate(5);
+        // $nama_tender
+
+        // return $data_vektor_s;
 
 
-        // return $bobotrata;
 
-        return $vektors;
+        return view('perangkingan.hasilperangkingan', ['vektor' => $data_vektor_s]);
+    }
 
-
-
-        return view('perangkingna.perangkingna', ['bobot' => $bobot]);
+    public function export_excel($id)
+    {
+        $data_report = Vektor::where('id_tender', $id)->get();
+        $pdf = PDF::loadview('report.perangkingan', ['vektor' => $data_report]);
+        return $pdf->download('laporan-rangking-pdf');
+        // return (new PerangkinganReport($data_report))->download('rangking.xlsx');
+        // return Excel::download(new HasilRankingExport, 'hasil_perrangkingan.xlsx');
     }
 }

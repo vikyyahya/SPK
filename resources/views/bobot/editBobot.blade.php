@@ -10,7 +10,7 @@
 
 			<div class="card" style="border-top: 3px solid">
 				<div class="card-header">
-					<h3 class="card-title">Tambah Data Bobot</h3>
+					<h3 class="card-title">Edit Data Bobot</h3>
 				</div>
 
 				<div class="card-body">
@@ -27,20 +27,20 @@
 					</div>
 
 					<div class="form-group">
-						<label>Deskripsi</label>
-						{{ Form::select('deskripsi', $deskripsi, $bobot->deskripsi, ['placeholder' => 'Pilih deskripsi...', 'required', 'class' => 'form-control']) }}
+						<label>Kriteria</label>
+						{{ Form::select('id_kriteria', $kriteria, $bobot->id_kriteria, ['placeholder' => 'Pilih deskripsi...', 'required', 'class' => 'form-control']) }}
 					</div>
 
 					<div class="form-group">
 						<label>Nilai Bobot</label>
 						{{ Form::select('nilai', $nilai, $bobot->nilai, ['placeholder' => 'Pilih Nilai...', 'required', 'class' => 'form-control']) }}
-                    </div>
+					</div>
 
 					<div class="form-group">
 						<label>Kategori</label>
 						{{ Form::select('kategori', $kategori, $bobot->kategori, ['placeholder' => 'Pilih Kategori...', 'required', 'class' => 'form-control']) }}
 					</div>
-                    
+
 
 					<div class="card-footer">
 

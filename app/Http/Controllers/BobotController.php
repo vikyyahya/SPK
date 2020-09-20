@@ -6,6 +6,8 @@ use App\Tender;
 use App\Kriteria;
 use App\Bobot;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class BobotController extends Controller
 {
@@ -34,16 +36,12 @@ class BobotController extends Controller
     {
         $bobot = Bobot::find($id);
         $tender = Tender::pluck('nama_proyek', 'id');
+        $kriteria = Kriteria::pluck('kriteria', 'id');
         $kategories = collect([
             ['id' => '1', 'name' => 'Benefit'],
             ['id' => '2', 'name' => 'Cost'],
         ]);
-        $deskripsies = collect([
-            ['id' => '1', 'name' => 'Jangka Waktu Pembayaran'],
-            ['id' => '2', 'name' => 'Harga'],
-            ['id' => '2', 'name' => 'Kualitas'],
-            ['id' => '2', 'name' => 'Status Stok Barang'],
-        ]);
+
         $nilais = collect([
             ['id' => '1', 'name' => '1'],
             ['id' => '2', 'name' => '2'],
@@ -52,14 +50,14 @@ class BobotController extends Controller
         ]);
         $kategori = $kategories->pluck('name', 'name');
         $nilai = $nilais->pluck('name', 'name');
-        $deskripsi = $deskripsies->pluck('name', 'name');
 
-        return view('bobot.editBobot', ['bobot' => $bobot, 'kategori' => $kategori, 'deskripsi' => $deskripsi, 'tender' => $tender, 'nilai' => $nilai]);
+        return view('bobot.editBobot', ['bobot' => $bobot, 'kategori' => $kategori, 'kriteria' => $kriteria, 'tender' => $tender, 'nilai' => $nilai]);
     }
 
     public function addBobot()
     {
         $tender = Tender::pluck('nama_tender', 'id');
+        $kriteria = Kriteria::pluck('kriteria', 'id');
         $kategories = collect([
             ['id' => '1', 'name' => 'Benefit'],
             ['id' => '2', 'name' => 'Cost'],
@@ -80,7 +78,7 @@ class BobotController extends Controller
         $kategori = $kategories->pluck('name', 'name');
         $nilai = $nilais->pluck('name', 'name');
         $deskripsi = $deskripsies->pluck('name', 'name');
-        return view('bobot.addBobot', ['kategori' => $kategori, 'deskripsi' => $deskripsi, 'tender' => $tender], ['nilai' => $nilai]);
+        return view('bobot.addBobot', ['kategori' => $kategori, 'kriteria' => $kriteria, 'tender' => $tender], ['nilai' => $nilai]);
     }
 
 
@@ -98,22 +96,24 @@ class BobotController extends Controller
     {
         $this->validate($request, [
             'tender' => 'required',
-            'deskripsi' => 'required',
+            'id_kriteria' => 'required',
             'nilai' => 'required',
             'kategori' => 'required',
         ]);
+        $kriteria = Kriteria::find($request->id_kriteria);
         //cek bobot
-        $bobot = Bobot::where([['id_tender', '=', $request->tender], ['deskripsi', '=', $request->deskripsi]])->get();
+        $bobot = Bobot::where([['id_tender', '=', $request->tender], ['id_kriteria', '=', $request->id_kriteria]])->get();
         // return count($bobot) ;
         if (count($bobot) != 0) {
             // return Redirect::back()->withErrors();
-            return back()->withErrors(['message' => 'Deskripsi sudah di gunakan']);
+            return back()->withErrors(['message' => 'Kriteria sudah di gunakan']);
         }
 
         $data = $request->all();
         Bobot::create([
-            'deskripsi' => $data['deskripsi'],
-            'kategori' =>  "Benefit",
+            'id_kriteria' => $data['id_kriteria'],
+            'kategori' =>  $data['kategori'],
+            'deskripsi' =>  $kriteria->kriteria,
             'nilai' => $data['nilai'],
             'id_tender' => $data['tender']
         ]);
@@ -126,5 +126,11 @@ class BobotController extends Controller
         $bobot = Bobot::find($id);
         $bobot->delete($bobot);
         return redirect('/bobot')->with('sukses', 'Data berhasil dihapus!');
+    }
+    public function export_excel()
+    {
+        $users = Bobot::all();
+        $pdf = PDF::loadview('report.reportbobot', ['bobot' => $users]);
+        return $pdf->download('laporan-bobot-pdf');
     }
 }

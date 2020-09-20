@@ -48,8 +48,8 @@
             <thead>
                 <tr>
                     <th class="text-center">No</th>
-                    <th class="text-center">Nama Proyek</th>
                     <th class="text-center">Nama Tender</th>
+                    <th class="text-center">Nama Proyek</th>
                     <th class="text-center">Nama Pelanggan</th>
                     <th class="text-center">Batas Waktu</th>
                     <th class="text-center" width="8%">Action</th>
@@ -60,8 +60,8 @@
                 @foreach($tender ?? '' as $s)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$s->nama_proyek}}</td>
                     <td>{{$s->nama_tender}}</td>
+                    <td>{{$s->nama_proyek}}</td>
                     <td>{{$s->nama_pelanggan}}</td>
                     <td>{{$s->batas_waktu}}</td>
                     <td>
@@ -70,7 +70,7 @@
                             <!-- URL::to('/admin/category/detail.id='.$cate-id -->
 
 
-                            <a href="/hitungperangkingan" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Perangkingan">
+                            <a href="/hitungperangkingan/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Perangkingan">
                                 <i class="">Perangkingan</i>
                             </a>
 

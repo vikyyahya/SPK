@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class SuplierController extends Controller
 {
@@ -43,5 +45,15 @@ class SuplierController extends Controller
         $user = User::find($id);
         $user->delete($user);
         return redirect('/suplier')->with('sukses', 'Data berhasil dihapus!');
+    }
+
+    public function export_excel()
+    {
+        $users = User::where('level', '2')->get();
+        $pdf = PDF::loadview('report.reportsuplier', ['users' => $users]);
+        return $pdf->download('laporan-suplier-pdf');
+
+        // return $users;
+        // return (new UserReport($users))->download('users.xlsx');
     }
 }

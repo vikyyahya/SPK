@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/createuser', 'UserController@create');
     Route::post('/upadateuser/{id}', 'UserController@update');
     Route::get('/user/{id}/delete', 'UserController@delete');
+    Route::get('/export_user', 'UserController@export_excel');
+
     // Tender
     Route::get('/tender', 'TenderController@tender');
     Route::get('/tender/cari', 'TenderController@cari');
@@ -37,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/createtender', 'TenderController@create');
     Route::post('/updatetender/{id}', 'TenderController@update');
     Route::get('/tender/{id}/delete', 'TenderController@delete');
+    Route::get('/export_tender', 'TenderController@export_excel');
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -48,15 +51,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bobot/{id}/delete', 'BobotController@delete');
     Route::get('/editbobot/{id}', 'BobotController@edit');
     Route::post('/updatebobot/{id}', 'BobotController@update');
+    Route::get('/export_bobot', 'BobotController@export_excel');
+
 
     //penawaran
     Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
     Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
     Route::get('/previewpenawaran/{id}', 'PenawaranHargaController@preview');
     Route::post('/creatpenawaran', 'PenawaranHargaController@create');
+    Route::get('/export_penawaran', 'PenawaranHargaController@export_excel');
+
     // perangkingan
     Route::get('/perangkingan', 'PerangkinganController@perangkingan');
-    Route::get('/hitungperangkingan', 'PerangkinganController@hitung');
+    Route::get('/hitungperangkingan/{id}', 'PerangkinganController@hitung');
+    Route::get('/export_perangkingan/{id}', 'PerangkinganController@export_excel');
 
     //Suplier
     Route::get('/suplier', 'SuplierController@suplier');
@@ -64,4 +72,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/editsuplier/{id}', 'SuplierController@edit');
     Route::post('/updatesuplier/{id}', 'SuplierController@update');
     Route::get('/suplier/cari', 'SuplierController@cari');
+    Route::get('/export_suplier', 'SuplierController@export_excel');
 });

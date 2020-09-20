@@ -6,6 +6,8 @@ use App\Tender;
 use App\Penawaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class PenawaranHargaController extends Controller
 {
@@ -90,5 +92,11 @@ class PenawaranHargaController extends Controller
         $penawaran = Penawaran::find($id);
         $nama_dok =  $penawaran->nama_dokumen;
         return view('penawaran_harga.previewpenawaran', ['penawaran' => $nama_dok]);
+    }
+    public function export_excel()
+    {
+        $p = Penawaran::all();
+        $pdf = PDF::loadview('report.reportpenawaran', ['p' => $p]);
+        return $pdf->download('laporan-penawaran-pdf');
     }
 }

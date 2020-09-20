@@ -27,20 +27,20 @@
 					</div>
 
 					<div class="form-group">
-						<label>Deskripsi</label>
-						{{ Form::select('deskripsi', $deskripsi, null, ['placeholder' => 'Pilih deskripsi...', 'required', 'class' => 'form-control']) }}
+						<label>Kriteria</label>
+						{{ Form::select('id_kriteria', $kriteria, null, ['placeholder' => 'Pilih kriteria...', 'required', 'class' => 'form-control']) }}
 					</div>
 
 					<div class="form-group">
 						<label>Nilai Bobot</label>
 						{{ Form::select('nilai', $nilai, null, ['placeholder' => 'Pilih Nilai...', 'required', 'class' => 'form-control']) }}
-                    </div>
+					</div>
 
 					<div class="form-group">
 						<label>Kategori</label>
 						{{ Form::select('kategori', $kategori, null, ['placeholder' => 'Pilih Kategori...', 'required', 'class' => 'form-control']) }}
 					</div>
-                    
+
 
 					<div class="card-footer">
 

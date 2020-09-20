@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Tender;
-
 use Illuminate\Http\Request;
+use App\Exports\TenderReport;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class TenderController extends Controller
 {
@@ -75,5 +77,14 @@ class TenderController extends Controller
         $tender = Tender::find($id);
         $tender->delete();
         return redirect('/tender')->with('sukses', 'Data berhasil dihapus!');
+    }
+
+    public function export_excel()
+    {
+        $tender = Tender::all();
+        $pdf = PDF::loadview('report.reporttender', ['tender' => $tender]);
+        return $pdf->download('laporan-tender-pdf');
+
+        // return (new TenderReport($tender))->download('users.xlsx');
     }
 }

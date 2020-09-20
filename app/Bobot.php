@@ -10,7 +10,7 @@ class Bobot extends Model
     public $table = "bobot";
 
     protected $fillable = [
-        'deskripsi', 'kategori', 'nilai', 'id_tender',
+        'deskripsi', 'kategori', 'nilai', 'id_tender', 'id_kriteria'
     ];
 
 

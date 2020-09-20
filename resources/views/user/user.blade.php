@@ -16,7 +16,11 @@
     <i class="icon fas fa-check"></i> {{ $sukses }}
 </div>
 @endif
-
+<a href="/export_user" class="btn btn-success  ml-3 mt-3">
+    <i class="fa fa-print nav-icon">
+        Cetak
+    </i>
+</a>
 <a href="/adduser" class="btn btn-primary ml-3 mt-3">
     <i class="fa fa-plus nav-icon">Tambah User</i>
 </a>
