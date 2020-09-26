@@ -102,7 +102,8 @@ class UserController extends Controller
     {
         $users = User::all();
         $pdf = PDF::loadview('report.reportuser', ['users' => $users]);
-        return $pdf->download('laporan-user-pdf');
+        $pdf->save(storage_path() . '/uniquename.pdf');
+        return $pdf->stream();
 
         // return $users;
         // return (new UserReport($users))->download('users.xlsx');
