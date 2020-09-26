@@ -51,8 +51,8 @@ class SuplierController extends Controller
     {
         $users = User::where('level', '2')->get();
         $pdf = PDF::loadview('report.reportsuplier', ['users' => $users]);
-        return $pdf->download('laporan-suplier-pdf');
-
+        $pdf->save(storage_path() . '/uniquename.pdf');
+        return $pdf->stream();
         // return $users;
         // return (new UserReport($users))->download('users.xlsx');
     }

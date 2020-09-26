@@ -146,8 +146,8 @@ class PerangkinganController extends Controller
     {
         $data_report = Vektor::where('id_tender', $id)->get();
         $pdf = PDF::loadview('report.perangkingan', ['vektor' => $data_report]);
-        return $pdf->download('laporan-rangking-pdf');
-        // return (new PerangkinganReport($data_report))->download('rangking.xlsx');
+        $pdf->save(storage_path() . '/uniquename.pdf');
+        return $pdf->stream();        // return (new PerangkinganReport($data_report))->download('rangking.xlsx');
         // return Excel::download(new HasilRankingExport, 'hasil_perrangkingan.xlsx');
     }
 }

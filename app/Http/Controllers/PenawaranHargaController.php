@@ -97,6 +97,7 @@ class PenawaranHargaController extends Controller
     {
         $p = Penawaran::all();
         $pdf = PDF::loadview('report.reportpenawaran', ['p' => $p]);
-        return $pdf->download('laporan-penawaran-pdf');
+        $pdf->save(storage_path() . '/uniquename.pdf');
+        return $pdf->stream();
     }
 }

@@ -83,7 +83,8 @@ class TenderController extends Controller
     {
         $tender = Tender::all();
         $pdf = PDF::loadview('report.reporttender', ['tender' => $tender]);
-        return $pdf->download('laporan-tender-pdf');
+        $pdf->save(storage_path() . '/uniquename.pdf');
+        return $pdf->stream();
 
         // return (new TenderReport($tender))->download('users.xlsx');
     }

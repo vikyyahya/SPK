@@ -131,6 +131,7 @@ class BobotController extends Controller
     {
         $users = Bobot::all();
         $pdf = PDF::loadview('report.reportbobot', ['bobot' => $users]);
-        return $pdf->download('laporan-bobot-pdf');
+        $pdf->save(storage_path() . '/uniquename.pdf');
+        return $pdf->stream();
     }
 }
