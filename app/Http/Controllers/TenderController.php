@@ -19,11 +19,21 @@ class TenderController extends Controller
     }
     public function cari(Request $request)
     {
+        $errors = new \Illuminate\Support\MessageBag();
+        $errors->add('Error', 'Data tidak di temukan');
         $cari = $request->cari;
         $tender = Tender::where('nama_proyek', 'like', "%" . $cari . "%")
             ->orwhere('nama_pelanggan', 'like', "%" . $cari . "%")
             ->orwhere('nama_tender', 'like', "%" . $cari . "%")->paginate(5);
-        return view('tender.tender', ['tender' => $tender]);
+        $td = Tender::where('nama_proyek', 'like', "%" . $cari . "%")
+            ->orwhere('nama_pelanggan', 'like', "%" . $cari . "%")
+            ->orwhere('nama_tender', 'like', "%" . $cari . "%")->get();
+
+        if (count($td) == 0) {
+            return redirect()->back()->withErrors($errors);;
+        } else {
+            return view('tender.tender', ['tender' => $tender]);
+        }
     }
 
     public function edittender($id)

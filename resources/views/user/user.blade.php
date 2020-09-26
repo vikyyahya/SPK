@@ -9,6 +9,12 @@
 </span>
 @endif
 
+@if($errors->any())
+<div class="alert alert-danger">
+    {{implode('', $errors->all(':message'))}}
+</div>
+@endif
+
 {{-- notifikasi sukses --}}
 @if ($sukses = Session::get('sukses'))
 <div class="alert alert-success alert-block">
