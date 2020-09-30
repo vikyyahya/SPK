@@ -63,6 +63,9 @@ class PenawaranHargaController extends Controller
             $data = $request->all();
             $date_time = date("Y-m-d h:i:s a", time());
             $fileName =  Auth::user()->id . $date_time . '.' . $request->file->extension();
+            $fileName = str_replace(':', '', $fileName);
+            $fileName = str_replace(' ', '', $fileName);
+            $fileName = str_replace('-', '', $fileName);
             $request->file->move(public_path('uploads'), $fileName);
 
             // return $request;
