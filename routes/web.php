@@ -29,7 +29,31 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/upadateuser/{id}', 'UserController@update');
     Route::get('/user/{id}/delete', 'UserController@delete');
     Route::get('/export_user', 'UserController@export_excel');
+});
+Route::group(['middleware' => ['auth']], function () {
+    //home
+    Route::get('/home', 'HomeController@index')->name('home');
+    //penawaran
+});
 
+Route::group(['middleware' => ['auth', 'suplier']], function () {
+    //home
+    Route::get('/home', 'HomeController@index')->name('home');
+    //penawaran
+    Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
+    Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
+    Route::get('/previewpenawaran/{id}', 'PenawaranHargaController@preview');
+    Route::post('/creatpenawaran', 'PenawaranHargaController@create');
+    Route::get('/export_penawaran', 'PenawaranHargaController@export_excel');
+});
+
+Route::group(['middleware' => ['auth', 'procurement']], function () {
+    //penawarran 
+    Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
+    Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
+    Route::get('/previewpenawaran/{id}', 'PenawaranHargaController@preview');
+    Route::post('/creatpenawaran', 'PenawaranHargaController@create');
+    Route::get('/export_penawaran', 'PenawaranHargaController@export_excel');
     // Tender
     Route::get('/tender', 'TenderController@tender');
     Route::get('/tender/cari', 'TenderController@cari');
@@ -40,9 +64,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/tender/{id}/delete', 'TenderController@delete');
     Route::get('/export_tender', 'TenderController@export_excel');
     Route::get('/home', 'HomeController@index')->name('home');
-
-
-
 
     //bobot
     Route::get('/bobot', 'BobotController@index');
@@ -66,14 +87,4 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/updatesuplier/{id}', 'SuplierController@update');
     Route::get('/suplier/cari', 'SuplierController@cari');
     Route::get('/export_suplier', 'SuplierController@export_excel');
-});
-Route::group(['middleware' => ['auth']], function () {
-    //home
-    Route::get('/home', 'HomeController@index')->name('home');
-    //penawaran
-    Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
-    Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
-    Route::get('/previewpenawaran/{id}', 'PenawaranHargaController@preview');
-    Route::post('/creatpenawaran', 'PenawaranHargaController@create');
-    Route::get('/export_penawaran', 'PenawaranHargaController@export_excel');
 });
