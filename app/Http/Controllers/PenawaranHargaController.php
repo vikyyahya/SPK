@@ -21,8 +21,15 @@ class PenawaranHargaController extends Controller
 
     public function index()
     {
-        $p = Penawaran::paginate(5);
-        return view('penawaran_harga.penawaran', ['p' => $p]);
+        if (Auth::user()->level == 1) {
+            $p = Penawaran::paginate(5);
+            return view('penawaran_harga.penawaran', ['p' => $p]);
+        } else if (Auth::user()->level == 2) {
+            $p = Penawaran::with('user')->wherehas('user', function ($q) {
+                $q->where('id', Auth::user()->id);
+            })->paginate(5);
+            return view('penawaran_harga.penawaran', ['p' => $p]);
+        }
     }
 
     public function penawaranharga()

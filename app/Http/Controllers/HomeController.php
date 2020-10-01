@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Tender;
+use App\Level;
+use App\Penawaran;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.dashboard');
+        $users = User::all()->where('level', '2');
+        $tender = Tender::all();
+        $penawaran = Penawaran::all();
+        return view('dashboard.dashboard', ['users' => count($users), 'tender' => count($tender), 'penawaran' => count($penawaran)]);
     }
 }

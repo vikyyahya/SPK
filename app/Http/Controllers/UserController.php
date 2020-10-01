@@ -9,10 +9,15 @@ use App\Exports\UserReport;
 use Barryvdh\DomPDF\Facade as PDF;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     //
+    public function __construct()
+    {
+    }
+
     public function user()
     {
         $users = User::paginate(5);
