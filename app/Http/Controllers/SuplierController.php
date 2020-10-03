@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
-
+use Illuminate\Support\Facades\Auth;
 
 class SuplierController extends Controller
 {
     //
     public function suplier()
     {
-        $users = User::where('level', '2')->paginate(5);
-        return view('suplier.suplier', ['users' => $users]);
+        if (Auth::user()->level == 3) {
+            $users = User::where('level', '2')->paginate(5);
+            return view('suplier.suplier', ['users' => $users]);
+        } else {
+            $users = User::where('level', '2')->where('id', Auth::user()->id)->paginate(5);
+            return view('suplier.suplier', ['users' => $users]);
+        }
     }
 
     public function cari(Request $request)

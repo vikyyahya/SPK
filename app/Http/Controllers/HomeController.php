@@ -7,6 +7,7 @@ use App\User;
 use App\Tender;
 use App\Level;
 use App\Penawaran;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,10 @@ class HomeController extends Controller
         $users = User::all()->where('level', '2');
         $tender = Tender::all();
         $penawaran = Penawaran::all();
-        return view('dashboard.dashboard', ['users' => count($users), 'tender' => count($tender), 'penawaran' => count($penawaran)]);
+        if (Auth::user()->level == 1) {
+            return view('dashboard.dashboard', ['users' => count($users), 'tender' => count($tender), 'penawaran' => count($penawaran)]);
+        } else {
+            return view('dashboard.dashboard2', ['users' => count($users), 'tender' => count($tender), 'penawaran' => count($penawaran)]);
+        }
     }
 }
