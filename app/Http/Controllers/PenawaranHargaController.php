@@ -21,7 +21,7 @@ class PenawaranHargaController extends Controller
 
     public function index()
     {
-        if (Auth::user()->level == 3) {
+        if (Auth::user()->level == 3 || Auth::user()->level == 1) {
             $p = Penawaran::paginate(5);
             return view('penawaran_harga.penawaran', ['p' => $p]);
         } else if (Auth::user()->level == 2) {

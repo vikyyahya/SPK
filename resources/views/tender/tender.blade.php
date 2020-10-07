@@ -72,7 +72,8 @@
             <tbody>
                 @foreach($tender ?? '' as $s)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
+                    <!-- <td>{{$loop->iteration}}</td> -->
+                    <td>{{ ($tender->currentpage()-1) * $tender->perpage() + $loop->index + 1 }}</td>
                     <td>{{$s->nama_proyek}}</td>
                     <td>{{$s->nama_tender}}</td>
                     <td>{{$s->nama_pelanggan}}</td>

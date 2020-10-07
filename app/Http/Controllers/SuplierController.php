@@ -12,7 +12,7 @@ class SuplierController extends Controller
     //
     public function suplier()
     {
-        if (Auth::user()->level == 3) {
+        if (Auth::user()->level == 3 || Auth::user()->level == 1) {
             $users = User::where('level', '2')->paginate(5);
             return view('suplier.suplier', ['users' => $users]);
         } else {

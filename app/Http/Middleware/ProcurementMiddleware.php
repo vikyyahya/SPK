@@ -23,7 +23,7 @@ class ProcurementMiddleware
 
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->level == 1 || Auth::user()->level == 2) {
+        if (Auth::user()->level == 2) {
             abort(403, 'Unauthorized action.');
         }
         return $next($request);

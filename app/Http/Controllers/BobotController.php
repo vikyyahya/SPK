@@ -84,9 +84,24 @@ class BobotController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'tender' => 'required',
+            'id_kriteria' => 'required',
+            'nilai' => 'required',
+            'kategori' => 'required',
+        ]);
+        $kriteria = Kriteria::find($request->id_kriteria);
+        $bobot = Bobot::where([['id_tender', '=', $request->tender], ['id_kriteria', '=', $request->id_kriteria]])->get();
+
+        // return count($bobot);
+        // if (count($bobot) != 0) {
+        //     // return Redirect::back()->withErrors();
+        //     return back()->withErrors(['message' => 'Kriteria sudah di gunakan']);
+        // }
         $bobot = Bobot::find($id);
         $tender = Tender::pluck('nama_proyek', 'id');
 
+        // return $bobot;
         $bobot->update($request->all());
 
         return redirect('/bobot')->with('sukses', 'Data berhasil diupdate!');

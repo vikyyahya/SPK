@@ -68,7 +68,7 @@
             <tbody>
                 @foreach($users ?? '' as $s)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
+                    <td>{{ ($users->currentpage()-1) * $users->perpage() + $loop->index + 1 }}</td>
                     <td>{{$s->name}}</td>
                     <td>{{$s->email}}</td>
                     <td>{{$s->levels->nama_level ?? '' }}</td>
@@ -78,9 +78,6 @@
                     <td>{{$s->no_telp}}</td>
                     <td>
                         <div class="btn-group">
-
-                            <!-- URL::to('/admin/category/detail.id='.$cate-id -->
-
 
                             <a href="/edituser/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>

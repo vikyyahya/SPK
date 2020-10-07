@@ -22,9 +22,9 @@ class SuplierMiddleware
     }
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->level == 1) {
-            abort(403, 'Unauthorized action.');
-        }
+        // if (Auth::user()->level == 1) {
+        //     abort(403, 'Unauthorized action.');
+        // }
         return $next($request);
     }
 }

@@ -61,7 +61,8 @@
             <tbody>
                 @foreach($p ?? '' as $s)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
+                    <!-- <td>{{$loop->iteration}}</td> -->
+                    <td>{{ ($p->currentpage()-1) * $p->perpage() + $loop->index + 1 }}</td>
                     <td>{{$s->user->nama_perusahaan}}</td>
                     <td>{{$s->tender->nama_tender}}</td>
                     <td>{{$s->nama_barang ?? '' }}</td>
