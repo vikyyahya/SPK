@@ -55,7 +55,7 @@ class PerangkinganController extends Controller
         // return print_r($rkriteria);
         //pangkat value
         $vektors = array();
-        foreach ($penawaran as $pen) {
+        foreach ($penawaran as  $key => $pen) {
             $jangPembayaran = $pen->pembayaran;
             $stc = $pen->stock;
             $kualitas = $pen->kualitas;
@@ -96,13 +96,15 @@ class PerangkinganController extends Controller
                 'total_vektor_s' => pow($vpembayaran, $rkriteria->{'Jangka Waktu Pembayaran'})
                     * pow($pen->harga, -$rkriteria->{'Harga'})
                     * pow($vkualitas, $rkriteria->{'Kualitas'})
-                    * ($vpembayaran / $rkriteria->{'Status Stok Barang'})
+                    * pow($vstock, $rkriteria->{'Status Stok Barang'})
             ]);
             $item_vektor = [];
             foreach ($bobotrata as $bobot) {
                 array_push($item_vektor, $bobot->kriterias->nilai);
             }
-            // return $item_vektor;
+            // if ($key == 1) {
+            //     return $vektors;
+            // }
 
             //save to table vektor
             foreach ($bobotrata as $v) {
@@ -113,7 +115,9 @@ class PerangkinganController extends Controller
         foreach ($vektors as $v) {
             $object = (object) $v;
             $sum_vektor_s +=  $object->total_vektor_s;
+            error_log($object->total_vektor_s);
         }
+        // return $sum_vektor_s;
         foreach ($vektors as $v) {
             $object = (object) $v;
             $id_penawaran = Penawaran::where('id_tender', $id)->where('id_user', $object->id_user)->first();
@@ -121,7 +125,7 @@ class PerangkinganController extends Controller
             if (count($vektor) > 0) {
                 // return $vektor;
                 $vek =  Vektor::find($vektor[0]->id);
-                $vek->nilai = $object->total_vektor_s;
+                $vek->nilai = $object->total_vektor_s / $sum_vektor_s;
                 $vek->save();
             } else {
                 Vektor::create([
