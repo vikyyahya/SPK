@@ -28,7 +28,6 @@
                 <th class="text-center">Nilai Bobot</th>
                 <th class="text-center">Kategori</th>
 
-                <th class="text-center" width="8%">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -39,23 +38,6 @@
                 <td>{{$s->deskripsi}}</td>
                 <td>{{$s->nilai}}</td>
                 <td>{{$s->kategori}}</td>
-
-                <td>
-                    <div class="btn-group">
-
-                        <!-- URL::to('/admin/category/detail.id='.$cate-id -->
-
-
-                        <a href="/editbobot/{{$s->id}}" class="btn btn-warning  btn-sm" data-toggle="tootip" data-placement="bottom" title="Edit">
-                            <i class="fa fa-edit nav-icon"></i>
-                        </a>
-
-                        <a onClick="return confirm('Yakin ingin menghapus data?')" href="/bobot/{{$s->id}}/delete" class="btn btn btn-danger btn-sm">
-                            <i class="fa fa-trash nav-icon"></i>
-                        </a>
-
-                    </div>
-                </td>
 
             </tr>
             @endforeach

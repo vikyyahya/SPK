@@ -32,8 +32,12 @@ class UserController extends Controller
         $errors->add('Error', 'Data tidak di temukan');
         $cari = $request->cari;
 
-        $users = User::where('name', 'like', "%" . $cari . "%")->paginate(5);
-        $us = User::where('name', 'like', "%" . $cari . "%")->get();
+        $users = User::where('name', 'like', "%" . $cari . "%")
+            ->orwhere('nama_perusahaan', 'like', "%" . $cari . "%")
+            ->paginate(5);
+        $us = User::where('name', 'like', "%" . $cari . "%")
+            ->orwhere('nama_perusahaan', 'like', "%" . $cari . "%")
+            ->get();
         // return count($us);
         if (count($us) == 0) {
             return redirect()->back()->withErrors($errors);;
@@ -111,7 +115,7 @@ class UserController extends Controller
         }
         return redirect('/users')->with('sukses', 'Data Berhasil Di Update!');
     }
-    public function export_excel()
+    public function export_pdf()
     {
         $users = User::all();
         $pdf = PDF::loadview('report.reportuser', ['users' => $users]);

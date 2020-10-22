@@ -146,7 +146,7 @@ class PerangkinganController extends Controller
         return view('perangkingan.hasilperangkingan', ['vektor' => $data_vektor_s]);
     }
 
-    public function export_excel($id)
+    public function export_pdf($id)
     {
         $data_report = Vektor::where('id_tender', $id)->get();
         $pdf = PDF::loadview('report.perangkingan', ['vektor' => $data_report]);

@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/createuser', 'UserController@create');
     Route::post('/upadateuser/{id}', 'UserController@update');
     Route::get('/user/{id}/delete', 'UserController@delete');
-    Route::get('/export_user', 'UserController@export_excel');
+    Route::get('/export_user', 'UserController@export_pdf');
 });
 Route::group(['middleware' => ['auth']], function () {
     //home
@@ -42,14 +42,14 @@ Route::group(['middleware' => ['auth', 'suplier']], function () {
     Route::get('/editsuplier/{id}', 'SuplierController@edit');
     Route::post('/updatesuplier/{id}', 'SuplierController@update');
     Route::get('/suplier/cari', 'SuplierController@cari');
-    Route::get('/export_suplier', 'SuplierController@export_excel');
+    Route::get('/export_suplier', 'SuplierController@export_pdf');
 
     //penawaran
     Route::get('/penawaranharga', 'PenawaranHargaController@penawaranharga');
     Route::get('/listpenawaranharga', 'PenawaranHargaController@index');
     Route::get('/previewpenawaran/{id}', 'PenawaranHargaController@preview');
     Route::post('/creatpenawaran', 'PenawaranHargaController@create');
-    Route::get('/export_penawaran', 'PenawaranHargaController@export_excel');
+    Route::get('/export_penawaran', 'PenawaranHargaController@export_pdf');
 });
 
 Route::group(['middleware' => ['auth', 'procurement']], function () {
@@ -68,7 +68,7 @@ Route::group(['middleware' => ['auth', 'procurement']], function () {
     Route::post('/createtender', 'TenderController@create');
     Route::post('/updatetender/{id}', 'TenderController@update');
     Route::get('/tender/{id}/delete', 'TenderController@delete');
-    Route::get('/export_tender', 'TenderController@export_excel');
+    Route::get('/export_tender', 'TenderController@export_pdf');
 
     //bobot
     Route::get('/bobot', 'BobotController@index');
@@ -78,12 +78,12 @@ Route::group(['middleware' => ['auth', 'procurement']], function () {
     Route::get('/bobot/{id}/delete', 'BobotController@delete');
     Route::get('/editbobot/{id}', 'BobotController@edit');
     Route::post('/updatebobot/{id}', 'BobotController@update');
-    Route::get('/export_bobot', 'BobotController@export_excel');
+    Route::get('/export_bobot', 'BobotController@export_pdf');
 
     // perangkingan
     Route::get('/perangkingan', 'PerangkinganController@perangkingan');
     Route::get('/hitungperangkingan/{id}', 'PerangkinganController@hitung');
-    Route::get('/export_perangkingan/{id}', 'PerangkinganController@export_excel');
+    Route::get('/export_perangkingan/{id}', 'PerangkinganController@export_pdf');
 
     //Suplier
     // Route::get('/suplier', 'SuplierController@suplier');

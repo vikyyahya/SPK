@@ -103,9 +103,13 @@ class PenawaranHargaController extends Controller
         $nama_dok =  $penawaran->nama_dokumen;
         return view('penawaran_harga.previewpenawaran', ['penawaran' => $nama_dok]);
     }
-    public function export_excel()
+    public function export_pdf()
     {
-        $p = Penawaran::all();
+        if (Auth::user()->level == 2) {
+            $p = Penawaran::where('id_user', Auth::user()->id)->get();
+        } else {
+            $p = Penawaran::all();
+        }
         $pdf = PDF::loadview('report.reportpenawaran', ['p' => $p]);
         $pdf->save(storage_path() . '/uniquename.pdf');
         return $pdf->stream();

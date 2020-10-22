@@ -52,9 +52,13 @@ class SuplierController extends Controller
         return redirect('/suplier')->with('sukses', 'Data berhasil dihapus!');
     }
 
-    public function export_excel()
+    public function export_pdf()
     {
-        $users = User::where('level', '2')->get();
+        if (Auth::user()->level == 2) {
+            $users = User::where('level', '2')->where('id', Auth::user()->id)->get();
+        } else {
+            $users = User::where('level', '2')->get();
+        }
         $pdf = PDF::loadview('report.reportsuplier', ['users' => $users]);
         $pdf->save(storage_path() . '/uniquename.pdf');
         return $pdf->stream();

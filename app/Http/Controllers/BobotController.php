@@ -142,7 +142,7 @@ class BobotController extends Controller
         $bobot->delete($bobot);
         return redirect('/bobot')->with('sukses', 'Data berhasil dihapus!');
     }
-    public function export_excel()
+    public function export_pdf()
     {
         $users = Bobot::all();
         $pdf = PDF::loadview('report.reportbobot', ['bobot' => $users]);

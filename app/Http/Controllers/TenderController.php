@@ -89,7 +89,7 @@ class TenderController extends Controller
         return redirect('/tender')->with('sukses', 'Data berhasil dihapus!');
     }
 
-    public function export_excel()
+    public function export_pdf()
     {
         $tender = Tender::all();
         $pdf = PDF::loadview('report.reporttender', ['tender' => $tender]);

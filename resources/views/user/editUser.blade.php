@@ -30,12 +30,12 @@
 
 			<div class="form-group">
 				<label>Password</label>
-				<input type="password" name="password" required class="form-control">
+				<input type="password" name="password" class="form-control">
 			</div>
 
 			<div class="form-group">
 				<label>Konfirmasi Password</label>
-				<input type="password" value="" name="syncpassword" required placeholder="" class="form-control">
+				<input type="password" value="" name="syncpassword" placeholder="" class="form-control">
 			</div>
 
 			<div class="form-group">
